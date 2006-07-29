@@ -1,0 +1,106 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <style type="text/css">
+      <!--
+        @import url(style.css);
+      //-->
+    </style>
+    <title>KikainekoMocker Project Web Site</title>
+  </head>
+  <body>
+    <div id="wrapper">
+ 
+      <div id="header">
+      <img class="kikaineko" src="img/kikaineko_little.png" alt="kikaineko"/>
+        <div id="title">&nbsp;KikainekoMocker Project</div>
+        <div id="menu">
+          <font color="green">&nbsp;- Implementation of SCT(Simulated Class by Tests) on Java -</font>
+        </div>
+      </div>
+      <div id="main">
+      
+      <h1>KikainekoMocker</h1>
+      <div class="left">
+        
+        <font color="blue" size=2><b>テストケースの書き方</b></font>
+        <h2>機械猫モッカーのためのテストケースの書き方</h2>
+          <div class="desc">
+          機械猫モッカーは通常のテストケースを食べて解析しますが、いくつかテストケースを書く上でのポイントがあります。<br/>
+（細かい内容に関しては、<a href="speck.html">仕様説明</a>をご覧下さい）<br/>
+<br/>
+サンプルプログラムを用いて、簡単なポイントを説明します。<br/>
+<a href="testsample.html">テストのサンプル</a>のCalcTest.javaを用います。<br/>
+</div>
+<h2>擬似クラス対象指定</h2>
+<div class="desc">
+機械猫モッカーは擬似クラス対象、つまりどのクラスを生成するかの指定をテストケースのフィールドで判断しています。<br/>
+<br/>
+<img src="img/test1.jpg"><br/>
+<br/>
+このようにすると、機械猫モッカーはCalc.javaを生成するのだと判断します。<br/><br/>
+<div class="notice">
+<ul class="dl">
+<li>指定するフィールドは必ず一つだけにしてください。</li>
+<li>ここでインスタンス化、null値代入などはしないで下さい。</li>
+</ul>
+</div>
+<br/>
+また、ここで「SomeInterface calc;」のようにインターフェースを指定すると、そのインターフェースを実装した擬似クラスを生成します。<br/>
+あるいは「SomeSuperClass calc;」のようにでスーパークラスを指定すると、そのスーパーークラスを継承した擬似クラスを生成します。
+</div>
+<h2>setUpメソッド・オーバーライド</h2>
+<div class="desc">
+<div class="notice">このsetUp・tearDownに関する制限はいずれ取り除かれます</div>
+setUpメソッドは必ずオーバーライドしてください。<br/>
+<br/>
+<img src="img/test2.jpg"><br/>
+<br/>
+この例では、setUpメソッドでインスタンス化していますが、特にsetUpで行う必要はありません。<br/>
+また、逆にtearDownメソッドはオーバーライドしないで下さい。<br/>
+</div>
+
+<h2>メソッドの返り値はassertEqualsで設定</h2>
+<div class="desc">
+対象クラスのメソッドが返り値を持つ場合（つまりvoid型じゃない場合）はassertEqualsで指定してください。<br/>
+（当然ですが、void型はassertEqualsに入れないで下さい）<br/>
+<br/>
+<img src="img/test3.jpg">
+<br/>
+<br/>
+assertEquals以外、例えば<br/>
+<br/>
+int i = calc.get();<br/>
+<br/>
+のように書くと、<br/>
+機械猫モッカーはどのような値を返せば良いのか判別できないためエラーになります。<br/>
+</div>
+
+
+      </div>
+        <div class="right">
+          <h2>Contents</h2>
+  <div class="desc">
+    <ul>
+      <li><a href="index.html">ホーム</a></li>
+      <br/>
+      <li><a href="gettingstarted.html">はじめてみよう</a></li>
+      <li><a href="testsample.html">テストのサンプル</a></li>
+      <li><a href="howtotest.html">テストケースの書き方</a></li>
+      <li><a href="speck.html">モッカーの仕様</a></li>
+      <br/>
+      <li><a href="http://sourceforge.jp/projects/kikainekomocker/files/">ダウンロード</a></li>
+    </ul>
+  </div>
+
+        </div>
+      
+      </div> <!-- end of main section -->
+ 
+      <div id="footer">
+        Copyright &copy; 2006 The Seasar Foundation and the others, All rights reserved.
+      </div>
+      
+    </div>
+  </body>
+</html>

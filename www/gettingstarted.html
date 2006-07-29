@@ -1,0 +1,103 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <style type="text/css">
+      <!--
+        @import url(style.css);
+      //-->
+    </style>
+    <title>KikainekoMocker Project Web Site</title>
+  </head>
+  <body>
+    <div id="wrapper">
+ 
+      <div id="header">
+      <img class="kikaineko" src="img/kikaineko_little.png" alt="kikaineko"/>
+        <div id="title">&nbsp;KikainekoMocker Project</div>
+        <div id="menu">
+          <font color="green">&nbsp;- Implementation of SCT(Simulated Class by Tests) on Java -</font>
+        </div>
+      </div>
+      <div id="main">
+      
+      <h1>KikainekoMocker</h1>
+      <div class="left">
+        
+        <font color="blue" size=2><b>はじめてみよう</b></font>
+        <h2>インストール</h2>
+          <div class="desc">
+          1.機械猫モッカープラグインを<a href="http://sourceforge.jp/projects/kikainekomocker/files/">download</a>して、zipファイルを解凍します。<br/>
+          2.解凍したフォルダーを、eclipseのpluginsフォルダーに入れます。<br/><br/>
+          <img src="img/pluginin1.jpg">
+          <br/><br/>
+          これでプラグイン導入完了です。<br/>
+          これだけで完了って！Eclipseかっこいいー！<br/>
+          </div>
+          <div class="notice">
+          ※Eclipseを使用せずに、コマンドラインからも使用可能です。
+          </div>
+          
+        <h2>テスト作成</h2>
+          <div class="desc">
+          1.プラグインが導入できたら、Eclipseを起動してください。<br/>
+          2.ここでは、サンプルとして【 KMSample 】というプロジェクトを作成しましょう。<br/>
+          3.KMSampleにsampleパッケージを作成します。<br/>
+          4.sampleパッケージにCalcTest.javaを作成します。<br/><br/>
+          <img src="img/sample2.jpg">
+          <br/><br/><br/>
+          5.このCalcTest.javaに、「<a href="testsample.html">テストのサンプル</a>」で例としてあげているテストコードを実装します。<br/>
+          6.当然、この段階ではCalcクラスは存在しないので、Eclipseに激しく怒られます。<br/>
+          <br/><br/>
+          <img src="img/sample3.jpg">
+       	  </div>
+	  
+        
+        <h2>機械猫モッカー実行</h2>
+            <div class="desc">
+            1.CalcTest.javaを右クリックしてください。<br/>
+            2.【機械猫Mocker】→【モックの生成】を実行してください。<br/>
+            <br/><br/>
+            <img src="img/sample4.jpg">
+            <br/><br/><br/>
+            3.次のような警告がでますが、気にせず「はい」を押してください。<br/>
+            （2回目以降は出てきません）<br/><br/><br/>
+            <img src="img/sample5.jpg"><br/><br/><br/>
+            4.すると、Calc.javaが生成されています。わーい。<br/><br/>
+            <img src="img/sample6.jpg"><br/>
+            </div>
+        
+        <h2>テスト実行</h2>
+            <div class="desc">
+            1．最後にClacTestのJuitを実行してみましょう。<br/><br/>
+            <img src="img/sample7.jpg"><br/><br/>
+            ばっちり、緑です！やったー！！
+            </div>
+
+
+      </div>
+        <div class="right">
+          <h2>Contents</h2>
+  <div class="desc">
+    <ul>
+      <li><a href="index.html">ホーム</a></li>
+      <br/>
+      <li><a href="gettingstarted.html">はじめてみよう</a></li>
+      <li><a href="testsample.html">テストのサンプル</a></li>
+      <li><a href="howtotest.html">テストケースの書き方</a></li>
+      <li><a href="speck.html">モッカーの仕様</a></li>
+      <br/>
+      <li><a href="http://sourceforge.jp/projects/kikainekomocker/files/">ダウンロード</a></li>
+    </ul>
+  </div>
+
+        </div>
+      
+      </div> <!-- end of main section -->
+ 
+      <div id="footer">
+        Copyright &copy; 2006 The Seasar Foundation and the others, All rights reserved.
+      </div>
+      
+    </div>
+  </body>
+</html>

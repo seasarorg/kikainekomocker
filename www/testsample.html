@@ -1,0 +1,155 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <style type="text/css">
+      <!--
+        @import url(style.css);
+      //-->
+    </style>
+    <title>KikainekoMocker Project Web Site</title>
+  </head>
+  <body>
+    <div id="wrapper">
+ 
+      <div id="header">
+      <img class="kikaineko" src="img/kikaineko_little.png" alt="kikaineko"/>
+        <div id="title">&nbsp;KikainekoMocker Project</div>
+        <div id="menu">
+          <font color="green">&nbsp;- Implementation of SCT(Simulated Class by Tests) on Java -</font>
+        </div>
+      </div>
+      <div id="main">
+      
+      <h1>KikainekoMocker</h1>
+      <div class="left">
+        
+        <font color="blue" size=2><b>テストのサンプル</b></font>
+        <h2>サンプル</h2>
+          <div class="desc">
+          機械猫モッカーはJUnitのテストケースをパスする擬似クラスを生成しますが
+          たとえば、以下のようなテストをパスします。<br/>
+<br/>
+<table>
+<tr bgcolor="#FFFFCC"><td>
+<br/>
+<pre>
+  package sample;
+  import junit.framework.TestCase;
+
+  public class CalcTest extends TestCase {
+      Calc calc;
+      
+      protected void setUp() throws Exception {
+          super.setUp();
+          calc=new Calc();
+      }
+      
+      public void testGet(){
+          assertEquals(0,calc.get(0,0));
+      }
+
+      public void testAdd(){
+          calc.set("+");
+          assertEquals(5,calc.get(2,3));
+      }
+      
+      public void testAddInteger(){
+          calc.set("+");
+          Integer i20=new Integer(20);
+          Integer i30=new Integer(30);
+          Integer i50=new Integer(50);
+          assertEquals(i50,calc.get(i20,i30));
+      }
+      
+      public void testMulti(){
+          calc.set("*");
+          assertEquals(6,calc.get(2,3));
+      }
+      
+      public void testDiv(){
+          calc.set("/");
+          assertEquals(2,calc.get(4,2));
+      }
+  }
+  
+</pre>
+</td></tr>
+</table>
+<br/>
+上のCalcTestを見ると、プリミティブ型やオブジェクト型を操作できることが分かります。<br/>
+このように機械猫モッカーは任意の型を操作することが可能です
+（ただし、全ての型を安全に操作できるわけではありません。詳細は仕様のドキュメントをご覧ください）。
+<br/>
+<br/>
+また、以下のようなテストもパスします。<br/>
+<br/>
+<table>
+<tr bgcolor="#FFFFCC"><td>
+<pre>
+  package sample;
+  import junit.framework.TestCase;
+  
+  public class TokenTest extends TestCase {
+      Token token;
+      
+      protected void setUp() throws Exception {
+          super.setUp();
+      }
+
+      public void testNext(){
+          token=new Token("a=10*c;");
+          assertEquals("a",token.next());
+          assertEquals("=",token.next());
+          assertEquals("10",token.next());
+          assertEquals("*",token.next());
+          assertEquals("c",token.next());
+          assertEquals(";",token.next());
+      }
+      public void testLength(){
+          token=new Token("a=10*c;");
+          assertEquals("6",token.length());
+      }
+
+  }
+  
+</pre>
+</td></tr>
+</table>
+<br/>
+TokenTestを見ると、同一メソッドを複数回実行していますが、機械猫モッカーはこれも問題なく扱えます。<br/>
+簡易な擬似クラスでは、1メソッドに1つの返り値しか持たせない場合がありますが、機械猫モッカーは呼び出し順なども考慮して
+返り値を決定してます。
+<br/>
+<br/>
+また、すでに対象となるクラスが存在する場合、<br/>
+既存のコードはすべてコメントアウトして、モックコードを書き込みます。<br/>
+          </div>
+
+
+      </div>
+        <div class="right">
+          <h2>Contents</h2>
+  <div class="desc">
+    <ul>
+      <li><a href="index.html">ホーム</a></li>
+      <br/>
+      <li><a href="gettingstarted.html">はじめてみよう</a></li>
+      <li><a href="testsample.html">テストのサンプル</a></li>
+      <li><a href="howtotest.html">テストケースの書き方</a></li>
+      <li><a href="speck.html">モッカーの仕様</a></li>
+      <br/>
+      <li><a href="http://sourceforge.jp/projects/kikainekomocker/files/">ダウンロード</a></li>
+    </ul>
+  </div>
+
+        </div>
+      
+      </div> <!-- end of main section -->
+ 
+      <div id="footer">
+        Copyright &copy; 2006 The Seasar Foundation and the others, All rights reserved.
+      </div>
+      
+    </div>
+  </body>
+</html>

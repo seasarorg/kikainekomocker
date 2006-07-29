@@ -1,0 +1,133 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <style type="text/css">
+      <!--
+        @import url(style.css);
+      //-->
+    </style>
+    <title>KikainekoMocker Project Web Site</title>
+  </head>
+  <body>
+    <div id="wrapper">
+ 
+      <div id="header">
+      <img class="kikaineko" src="img/kikaineko_little.png" alt="kikaineko"/>
+        <div id="title">&nbsp;KikainekoMocker Project</div>
+        <div id="menu">
+          <font color="green">&nbsp;- Implementation of SCT(Simulated Class by Tests) on Java -</font>
+        </div>
+      </div>
+      <div id="main">
+      
+      <h1>KikainekoMocker</h1>
+      <div class="left">
+        
+        <font color="blue" size=2><b>モッカーの仕様</b></font>
+        <h2>機械猫モッカー仕様</h2>
+          <div class="desc">
+          機械猫モッカーはJava1.4の文法にそった解析を行いますが、完全ではありません。ここでは細かな差異を示します。<br/>
+</div>
+<h2>プリミティブ型</h2>
+<div class="desc">
+モッカーでは全てのプリミティブ型を扱えるわけではありません。具体的には以下の型を扱えます。
+<ul class="dl">
+<li>int型</li>
+<li>float型（1.0fのような形式以外は対応していません）</li>
+<li>long型</li>
+<li>double型（1.0、1.0dのような形式以外は対応していません）</li>
+<li>char型</li>
+<li>boolean型</li>
+</ul>
+</div>
+
+<h2>オブジェクト型</h2>
+<div class="desc">
+モッカーで基本的に任意のオブジェクト型を取り扱うことができます。<br/>
+ただし、以下の条件を持つオブジェクトは取り扱いに脆弱性が存在します。
+多くの場合、問題になりませんが、気をつけてください。<br/>
+<ul class="dl">
+<li>内部に循環参照を持つオブジェクト</li>
+<li>コンストラクタの引数の型がインターフェース・アブストラクト型で指定されている</li>
+</ul>
+</div>
+
+<h2>テストケースに関する注意点</h2>
+<div class="desc">
+機械猫モッカーは、オブジェクト型を返すメソッドを実装しますが<br/>
+返すクラスがequalsメソッドをオーバーライドしていないとテストはパスしません。<br/>
+<br/>
+例えば、<br/>
+<br/>
+Integer i=new Integer(10);<br/>
+assertEquals(i,target.getInt(10));<br/>
+<br/>
+を読み込むと、Integer型を返すgetIntメソッドを実装します。<br/>
+そして、Integerはequalsメソッドをオーバーライドしているため、テストはパスします。<br/>
+<br/>
+ですが<br/>
+<br/>
+StringBuffer sb=new StringBuffer("test");<br/>
+assertEquals(sb,target.getSb("test"));<br/>
+<br/>
+の場合、機械猫モッカーはsbと同等なオブジェクトを返しますが、<br/>
+StringBufferがequalsメソッドをオーバーライドしていないため、テスト自体は失敗してしまいます。<br/>
+<br/>
+機械猫モッカーは期待値に入れられたオブジェクトのtransientとstatic、final以外の全ての<br/>
+フィールド変数を参照し、その値と同じフィールドを持つオブジェクトを返します。<br/>
+（ハッシュコードまでは同一ではありませんので、equalsメソッドがオーバーライドされていないと失敗します）<br/>
+</div>
+
+<h2>テストケースに対する制限</h2>
+<div class="desc">
+テストケースには以下の制限が課せられています。<br/>
+これらのうちのいくつかは将来取り除かれますが、気をつけてください。<br/>
+<br/>
+
+<ul class="dl">
+<li>クラス変数に、モック対象のクラスを必ず宣言してください。この宣言でモック対象を判断しています。<br/>
+     また、必ずsetUpメソッドかtestメソッド内でインスタンス化してください。</li>
+<li>setUpメソッドは必ずオーバーライドしてください。逆にtearDownメソッドはオーバーライドしないで下さい。</li>
+<li>モック対象以外のクラス変数は書かないでください。</li>
+<li>モック対象のstaticメソッドには対応できません。</li>
+<li>多次元配列も使用できません。</li>
+<li>キャストもしないで下さい。</li>
+<li>コンストラクター・メソッド以外呼び出さないでください。</li>
+<li> assertEquals( expected , actual )という形式以外使用できません。<br/>
+   つまり、assertTrueなどのassertメソッドは解析しません。<br/>
+   また、必ず期待値、実測値の順に書いてください。</li>
+<li>返り値があるメソッドは、assertEqualsで明示してください。（assertEqualsにないとvoidと判断されてしまいます。）</li>
+<li>for文・if文・while文・switch文などの制御構造文、省略記法は使用できません。</li>
+<li>デフォルト・パッケージは避けてください。</li>
+</div>
+
+
+
+
+      </div>
+        <div class="right">
+          <h2>Contents</h2>
+  <div class="desc">
+    <ul>
+      <li><a href="index.html">ホーム</a></li>
+      <br/>
+      <li><a href="gettingstarted.html">はじめてみよう</a></li>
+      <li><a href="testsample.html">テストのサンプル</a></li>
+      <li><a href="howtotest.html">テストケースの書き方</a></li>
+      <li><a href="speck.html">モッカーの仕様</a></li>
+      <br/>
+      <li><a href="http://sourceforge.jp/projects/kikainekomocker/files/">ダウンロード</a></li>
+    </ul>
+  </div>
+
+        </div>
+      
+      </div> <!-- end of main section -->
+ 
+      <div id="footer">
+        Copyright &copy; 2006 The Seasar Foundation and the others, All rights reserved.
+      </div>
+      
+    </div>
+  </body>
+</html>
