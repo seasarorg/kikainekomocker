@@ -1,0 +1,78 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <style type="text/css">
+      <!--
+        @import url(style.css);
+      //-->
+    </style>
+    <title>KikainekoMocker Project Web Site</title>
+  </head>
+  <body>
+    <div id="wrapper">
+ 
+      <div id="header">
+      <img class="kikaineko" src="img/kikaineko_little.png" alt="kikaineko"/>
+        <div id="title">&nbsp;KikainekoMocker Project</div>
+        <div id="menu">
+          <font color="green">&nbsp;- Implementation of SCT(Simulated Class by Tests) on Java -</font>
+        </div>
+      </div>
+      <div id="main">
+      
+      <h1>KikainekoMocker</h1>
+      <div class="left">
+        
+        <font color="blue" size=2><b>テキストUIからの実行</b></font>
+        <h2>もう一つの機械猫モッカーの実行方法</h2>
+          <div class="desc">
+          通常機械猫モッカーはEclipseのプラグインから実行されることを想定していますが、テキスト形式から呼び出すことも可能です。<br/>
+          MockMakerクラスを使用します。<br/>
+          <br/>
+          具体的には何らかのクラスに以下のmainメソッドを実装して、実行してください。<br/><br/>
+<hr color="hotpink"/>
+<pre>
+public static void main(String[] args){
+  try{
+    String[] ss={"src\\sample\\SampleTest.java"};
+    MockMaker.main(ss);
+  }catch(Throwable t){
+    t.printStackTrace();
+  }
+}
+</pre>
+<hr color="hotpink"/>
+<br/>
+文字列配列のssには対象テストファイルのパスを指定してください。（Eclipseプロジェクトからのパスです）<br/>
+また、MockMakerクラスはorg.kikaineko.mock.textui.MockMakerにあります。
+</div>
+
+
+      </div>
+        <div class="right">
+          <h2>Contents</h2>
+  <div class="desc">
+    <ul>
+      <li><a href="index.html">ホーム</a></li>
+      <br/>
+      <li><a href="gettingstarted.html">はじめてみよう</a></li>
+      <li><a href="testsample.html">テストのサンプル</a></li>
+      <li><a href="howtotest.html">テストケースの書き方</a></li>
+      <li><a href="speck.html">モッカーの仕様</a></li>
+      <li><a href="textui.html">テキストUIから呼び出す方法</a></li>
+      <br/>
+      <li><a href="http://sourceforge.jp/projects/kikainekomocker/files/">ダウンロード</a></li>
+    </ul>
+  </div>
+
+        </div>
+      
+      </div> <!-- end of main section -->
+ 
+      <div id="footer">
+        Copyright &copy; 2006 The Seasar Foundation and the others, All rights reserved.
+      </div>
+      
+    </div>
+  </body>
+</html>
