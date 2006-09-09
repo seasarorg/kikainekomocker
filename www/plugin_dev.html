@@ -1,0 +1,107 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <style type="text/css">
+      <!--
+        @import url(style.css);
+      //-->
+    </style>
+    <title>KikainekoMocker Project Web Site</title>
+  </head>
+  <body>
+    <div id="wrapper">
+ 
+      <div id="header">
+      <img class="kikaineko" src="img/kikaineko_little.png" alt="kikaineko"/>
+        <div id="title">&nbsp;KikainekoMocker Project</div>
+        <div id="menu">
+          <font color="green">&nbsp;- Implementation of SCT(Simulated Class by Tests) on Java -</font>
+        </div>
+      </div>
+      <div id="main">
+      
+      <h1>KikainekoMocker</h1>
+      <div class="left">
+        
+        <font color="blue" size=2><b>プラグイン開発にかんして</b></font>
+        <h2>はじめに</h2>
+          <div class="desc">
+          現在の機械猫モッカーのEclipseプラグインはとても不安定で、環境ごとに動いたり動かなかったりが激しいようです。
+          またプラグイン側をちょっといじるとすぐに実行できなくなってしまい。まったくもってワケワカな状態です。<br/>
+          まぁ僕のプラグイン開発スキルがないだけなのですが。。。
+          <br/><br/>
+          ここで僕がどのようにテストしたりしているかを公開しますので、「その方法はまずい」とか「こうしなさい」などありましたら
+          ぜひともご教授ください。
+          </div>
+        <h2>sourceforgeのCVSから取得</h2>
+          <div class="desc">
+          とりあえずCVSのヘッドから最新を取得します。その際にソースだけではなく、plugin.xmlなどもずらずらと落すことが肝心です。<br/>
+          また、プラグイン側に機械猫モッカー本体のJARが入っています。（デプロイする際に内包されるJARです）
+       	  </div>
+	  
+        <h2>ビルド環境</h2>
+          <div class="desc">
+          僕の環境はJDK1.5のコンパイルレベル1.4です。
+       	  </div>
+       <h2>デプロイ</h2>
+          <div class="desc">
+          プラグインのデプロイってかなりEclipseのバージョンに寄ってるんでしょうか。あるいはプラグイン開発用のプラグインの有無の差か？
+          とかく、環境によってデプロイの方法が違っています。<br/>
+          <br/>
+          私のメインの開発機では以下のようにしています。<br/>
+          <br/>
+          ☆プラグインのプロジェクトを選択→右クリック→エクスポート<br/>
+          <br/>
+          ほいで<br/>
+          ☆Deployable plug-ins and fragmentsを選択し、Next<br/>
+          <br/>
+          <img src="img/plugin_dev1.JPG"><br/>
+          <br/>
+          すると、こんな画面になって<br/>
+          <img src="img/plugin_dev2.JPG"><br/>
+          
+          まぁいろいろあるけども「DestinationのArchive」で保存先を決定し、Finish
+       	  </div>
+        
+        <h2>で、実行</h2>
+            <div class="desc">
+           で、実行するとエラーになります。<br/>
+           いま、分かっているのは<br/>、
+           <li>UnsupportedClassVersionErrorが発生して、落ちる。見た目は何も実行されていないように見える。Eclipseのプロジェクトのログに出ている</li>
+           <li>生成がキャンセルされました、みたいなメッセージがでる。これは、通常ユーザがキャンセルボタンを押したさいに発生するものだが、、、</li>
+           <li>そもそも機械猫モッカーのラベルが出てこない。→なぜかプラグインとして認識されていない</li>
+           の3つが入れ替わり立ち代り現れます。<br/>
+           どうしたものか。<br/>
+           <br/>
+           あ、一点、プラグイン側にデプリケイトなメソッドがあります。
+            </div>
+
+
+      </div>
+        <div class="right">
+          <h2>Contents</h2>
+  <div class="desc">
+    <ul>
+      <li><a href="index.html">ホーム</a></li>
+      <br/>
+      <li><a href="gettingstarted.html">はじめてみよう</a></li>
+      <li><a href="testsample.html">テストのサンプル</a></li>
+      <li><a href="howtotest.html">テストケースの書き方</a></li>
+      <li><a href="speck.html">モッカーの仕様</a></li>
+      <li><a href="textui.html">テキストUIから呼び出す方法</a></li>
+      <br/>
+      <li><a href="http://sourceforge.jp/projects/kikainekomocker/files/">ダウンロード</a></li>
+    </ul>
+  </div>
+
+        </div>
+      
+      </div> <!-- end of main section -->
+ 
+      <div id="footer">
+        Copyright &copy; 2006 The Seasar Foundation and the others, All rights reserved.
+      </div>
+      
+    </div>
+  </body>
+</html>
