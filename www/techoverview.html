@@ -1,0 +1,288 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <style type="text/css">
+      <!--
+        @import url(style.css);
+      //-->
+    </style>
+    <title>KikainekoMocker Project Web Site</title>
+  </head>
+  <body>
+    <a name="Top" />
+    <div id="wrapper">
+    
+      <div id="header">
+      <img class="kikaineko" src="img/kikaineko_top.png" alt="kikaineko"/>
+      </div>
+      <div id="main">
+      
+      <h1>KikainekoMocker</h1>
+      <div class="left">
+        
+        <font color="blue" size="2"><b>技術<span id="orange">仕</span>様</b></font><br/><br/>
+        <div class="desc">
+        ここでは、機械猫モッカーの設計仕様や処理の流れを説明します。<br/><br/>
+        これは、機械猫モッカーの開発者向けの情報です。よって、
+        機械猫モッカーを使用するだけの場合、ここで記述されている内容を理解する必要はありません。<br/>
+        </div>
+        
+        <h2><span id="orange">目</span>次</h2>
+          <div class="desc">
+          <ul class="dl">
+            <li><a href="#Overview">機械猫モッカーの設計概要</a></li>
+            <li><a href="#Specification">擬似クラスの動作</a></li>
+          </ul>
+          </div>
+        <br/>
+        
+        
+        <a name="Overview" />
+        <div id="section">機械猫モッカーの設計<span id="orange">概</span>要</div>
+          <div class="desc">
+          機械猫モッカーは以下の流れに沿って処理を実行しています。<br/><br/>
+          <ol>
+          <li>字句解析</li>
+          <li>テスト解析</li>
+          <li>コード生成</li>
+          </ol>
+          </div>
+        
+        <h2>字<span id="orange">句</span>解析</h2>
+          <div class="desc">
+          機械猫モッカーは、Java が行う字句解析とほぼ等価な字句を切り出します。<br/><br/>
+          まず、org.kikaineko.sourcescan.CodeReader クラスがテスト・コードを読み込み、
+          コメントを省いたトークンの配列を返します。<br/>
+          （また、この際にダブル・クオートとシングル・クオートで括られた部分を識別します。）<br/>
+          実際には、このとき返されるのは、トークンの配列を抽象化した org.kikaineko.source.util.TokenArray クラス
+          のインスタンスが返されます。<br/><br/>
+          字句解析そのものを行っているのは、org.kikaineko.sourcescan.Tokenizer クラスであり、
+          内部に org.kikaineko.sourcescan.TokenAutomaton を保持しています。<br/>
+          また、この Tokenizer はコメントの除去までは行わず、コメントの除去は CodeReader クラスが
+          内部に org.kikaineko.sourcescan.CommentAutomaton を保持して実行しています。<br/>
+          </div>
+        
+        <h2>テスト解<span id="orange">析</span></h2>
+          <div class="desc">
+          テスト解析フェーズでは、前期と後期の2つに分かれています。</br>
+          前期テスト解析では、テストコードにどんなテストメソッドがあるのかとか、
+          擬似化対象のクラス（ターゲットと呼びます）は何かとか、後期テスト解析のための下準備を行います。
+          
+          <h3>前期テスト解析</h3>
+            前期テスト解析フェーズで主役を演じるのは、org.kikaineko.mock.analysis.TestAnalyst クラスです。<br/>
+            このクラスは、先ほど抽出したTokenArrayを受け取り、
+            org.kikaineko.mock.framework.TestClass と org.kikaineko.mock.framework.TargetClass を生成します。<br/><br/>
+            
+            TestClass クラスは、テストコードを抽象化したクラスで、
+            TargetClass クラスは、モック対象（生成する対象）を抽象化したクラスです。<br/><br/>
+            
+            TestAnalystクラスは、TestClassに対してsetUp及びtestメソッドのTokenArrayを切り出します。
+            また、TargetClassクラスに対しては、クラス名やパッケージ名などを指定します。
+          
+          <h3>後期テスト解析</h3>
+            次にいよいよテスト解析のメイン部分、後期テスト解析です。<br/>
+            ここで主役となるのは、org.kikaineko.mock.analysis.SmallCompiler クラスです。<br/>
+            （これが機械猫モッカーの心臓部です）<br/><br/>
+            
+            SmallCompiler クラスは、TestClass を受け取ると TestClass が保持している test メソッドを調べ、 
+            setUp メソッド → test メソッドという順番でコードを解析していきます。<br/><br/>
+            
+            このとき、SmallCompiler は実際に計算やオブジェクトのインスタンス化などを実行しています。<br/>
+            つまりほぼコンパイラーやインタプリタと同じ解析を行っています。異なるのは、TargetClass の存在です。<br/><br/>
+            
+            例えば、今 Calc.java の擬似クラスを生成したいとして、Calc calc という変数名を
+            記述している場合 SmallCompiler は calc という名前を見つけるたびに TargetClass にアクセスを行います。<br/><br/>
+            
+            この際、calc に対して行われた処理を解析し、Calc が持つべきメソッドを判断します。<br/>
+            また、calc に行われた処理を全て history として保持していきます。<br/>
+            そして assertEquals が呼ばれたときに、calc がどのような値を返すことを期待されるかを判断し、
+            その値とそれまでの history を記録します。
+          </div>
+        
+        <h2>コード<span id="orange">生</span>成</h2>
+          <div class="desc">
+          最終フェーズです。</br>
+          SmallCompiler クラスが解析した結果を全て TargetClass に記録し、
+          それを org.kikaineko.mock.runner.Implementer クラスが受け取りコードを生成します。<br/><br/>
+          
+          Implementer が行っている処理は、単純です。<br/>
+          TargetClass が保持するコンストラクター・メソッドを調べ、それをコードに落し、Stringとして返します。
+          <br/><br/>
+          <a href="#Top">[to top]</a>
+          </div>
+          <br/>
+        
+        
+        <a name="Specification" />
+        <div id="section">擬似クラス<span id="orange">の</span>動作</div>
+          <div class="desc">
+          機械猫モッカーが生成する擬似クラスがどのように動作するかを大まかに解説します。<br/><br/>
+          </div>
+        
+        <h2>内部<span id="orange">変</span>数</h2>
+          <div class="desc">
+          機械猫モッカーはモッククラスに次のフィールドを保持します。</br>
+          ※フィールド名は、バージョン0.9.4のもので、名称が変更される可能性があります。
+          <dl>
+            <dt>private String kikainekoHistory</dt>
+              <dd>擬似クラスが呼び出された順番を記録する変数です。</dd>
+            <dt>private final String[] kikainekoHis</dt>
+              <dd>テスト・ケース内で指定された擬似クラスの呼出順を保持する配列です。</dd>
+            <dt>private final String[] kikainekoRes</dt>
+              <dd>擬似クラスが呼び出された順番を記録する変数です</dd>
+            <dt>private static final Class[] kikainekoUsedConcreteClasses</dt>
+              <dd>これは機械猫モッカーには重要ですが、擬似クラスの挙動理解には不要です。<br/>
+              このフィールドはテスト・ケースを実行した際に使用される具象クラスのクラスを保持します。<br/>
+              この値を使うことによって、機械猫モッカーはインターフェースへのインスタンス化に対応しようとします。</dd>
+          </dl>
+          </div>
+          
+          <h2>動<span id="orange">作</span>概要</h2>
+            <div class="desc">
+            擬似クラスの動作は単純です。</br>
+            <ol>
+            <li>擬似クラスが呼び出される度に、それを kikainekoHistory に記録します。</li>
+            <li>kikainekoHistory を kikainekoHis 配列の中身と比較し、一致するものがあればその index を返します。</li>
+            <li>その index と同じ kikainekoRes 配列の要素を返します。</li>
+            <li>kikainekoRes 配列から返された値を解析して、擬似クラスのメソッドの返り値として返します。</li>
+            </ol>
+            <br/>
+            例）
+            <table>
+            <tr bgcolor="#FFFFCC"><td>
+            <br/>
+            <pre>
+  public int doSomething( java.lang.Object arg0 ) {
+  　<font color="green">//TODO To change.Mock Part Start ...</font>
+  　String[] args = { org.kikaineko.mock.util.ToStringer.get(arg0) };
+  　
+  　<font color="red">//呼出を記録し、その記録を返している (1) </font>
+  　String cond = kikainekoHistoryAdd("doSomething(java.lang.Object )", args, false ;
+  　<font color="red">//呼出記録と一致する返り値を（文字列）で取得 (2,3)</font>
+  　String res = kikainekoReturn ( cond ) ;　
+
+  　<font color="green">//TODO To change.Mock Part End.</font>
+    
+    <font color="red">//文字列の返り値を解析して、期待される型に変換 (4)</font>
+  　return org.kikaineko.mock.util.ReturnValue.intValue(res);
+  }
+            </pre>
+            </td></tr>
+            </table>
+            ※赤字のコメントが説明用に追加したもので、それ以外は実際にモッカーが生成するコードです。
+            </div>
+          
+          <h2>呼び出<span id="orange">さ</span>れるメソッド</h2>
+            <div class="desc">
+            擬似クラスでは、以下のメソッドが呼び出されています。</br>
+            <dl>
+              <dt>org.kikaineko.mock.util.ToStringer.get( Object )</dt>
+                <dd>引数の Object 型（プリミティブ型を含む）を機械猫モッカーの規則にしたがって文字列に変換します。<br/>
+  　　          これは、機械猫モッカー独自のメソッドです。</dd>
+              <dt>String kikainekoHistoryAdd ( String name, String[] args, boolean false )</dt>
+                <dd>第一引数の name はメソッドの名前で、args は引数の文字列表現の配列です。<br/>
+                このメソッドは、name メソッドが引数 args で呼ばれたことを kikainekoHistory に
+                記録していくメソッドです。<br/>
+                これは、擬似クラス内に生成されます。</dd>
+              <dt>String kikainekoReturn ( String cond )</dt>
+                <dd>呼出記録を引数にとって、返り値の文字列表現を取得するメソッドです。<br/>
+                kikainekoRes 配列の要素を返します。<br/>
+                これは、擬似クラス内部に生成されます。</dd>
+              <dt>org.kikaineko.mock.util.ReturnValue.intValue ( String res )</dt>
+                <dd>返り値の文字列表現を期待される型に変換するメソッドです。<br/>
+                org.kikaineko.mock.util.ToStringer と逆方向の変換を実行します。<br/>
+                これは、機械猫モッカー独自のメソッドです。</dd>
+            </dl>
+            機械猫モッカーは基本的に何を実行しているのかを明確にするために、
+            意図的に擬似クラス内に2つのメソッドを生成しています。<br/>
+            ただし、<br/>
+            &nbsp;&nbsp;org.kikaineko.mock.util.ToStringer<br/>
+            &nbsp;&nbsp;org.kikaineko.mock.util.ReturnValue<br/>
+            の2つが機械猫モッカーにアクセスしており、その結果擬似クラスが機械猫モッカーに依存してます。<br/>
+            （100行以上も意味不明なコードをずらずらと擬似クラスに生成するよりはマシかと…）
+            </div>
+            
+            
+          <h2>文字<span id="orange">列</span>変換規則</h2>
+            <div class="desc">
+            機械猫モッカーでは、内部で扱われる値を全て文字列で処理するため、
+            プリミティブ型やオブジェクトなど文字列に変換する規則が必要となります。<br/>
+            ここでは、その規則の概要を説明します。<br/><br/>
+            
+            文字列変換を一手に引き受けているのが org.kikaineko.mock.util.ToStringer です。<br/>
+            その逆変換を行うのがorg.kikaineko.mock.util.ReturnValueです。
+            
+            <h3>プリミティブ / String / ラッパー</h3>
+              プリミティブ型、及び、String とラッパーは、ほぼそのまま変換します。つまり、
+              <table>
+              <tr bgcolor="#FFFFCC"><td>
+              <br/>
+              <pre>
+  assertEquals ( "1", ToStringer.get ( 1 ) );
+  assertEquals ( "1.0", ToStringer.get ( 1.0 ) );
+  assertEquals ( "true", ToStringer.get ( true ) );
+  assertEquals ( "false", ToStringer.get ( false ) );
+  assertEquals ( "test", ToStringer.get ( "test" ) );
+  assertEquals ( "1", ToStringer.get ( new Integer ( 1 ) ) ) ;
+              </pre>
+              </td></tr>
+              </table>
+              が成功するような変換を行います。
+            
+            <h3>オブジェクト</h3>
+              オブジェクトの文字列表現への置き換えは、少し複雑な処理を行っています。<br/><br/>
+              
+              まず、オブジェクトの文字列表現ですぐに思いつくのは toString() メソッドですが、
+              機械猫モッカーは toString() メソッドは使用していません。<br/>
+              その理由としては、全てのクラスに対してオーバーライドが期待できないという点
+              と toString() メソッドの結果から、オブジェクトを再生成することが非常に困難だという点です。<br/><br/>
+              
+              そこで機械猫モッカーでは、オブジェクトの文字列表現として、
+              そのオブジェクトが持つフィールドを文字列に表現することを戦略として採用しています。<br/>
+              フィールドがプリミティブ型、文字列、ラッパーのいずれかであれば、そのまま文字列に変換しますが、
+              フィールド自体がオブジェクトであれば、そのオブジェクトがもつフィールドを文字列に変換する
+              というような再帰的な変換を行います。<br/><br/>
+              
+              例えば、int型のフィールドを2つ持っているオブジェクトを文字列変換すると次のようになります。
+              <table>
+              <tr bgcolor="#FFFFCC"><td>
+              <br/>
+              <pre>
+  assertEquals ( "1 2 ", ToStringer.get ( new TwoInt ( 1, 2 ) ) ) ;
+              </pre>
+              </td></tr>
+              </table>
+              空白文字「 」を区切りとして、フィールドを文字列に変換します。<br/><br/>
+              
+              ただし、static / final / transientで修飾されたフィールドは文字列変換の対象とはなりません。<br/>
+              これはそのオブジェクトの状態を表現するものではないと判断されるからです。
+              <br/><br/>
+              <a href="#Top">[to top]</a>
+              </div>
+              <br/>
+            
+          
+      </div> <!-- end of left section -->
+      
+      
+      <div class="right">
+        <h2>Conte<span id="orange">n</span>ts</h2>
+          <div class="desc">
+            <ul>
+              <li><a href="index.html">ホーム</a></li>
+              <li><a href="userguide.html">使用ガイド</a></li>
+              <li><a href="techoverview.html">技術仕様</a></li>
+              <li><a href="http://sourceforge.jp/projects/kikainekomocker/files/">ダウンロード</a></li>
+            </ul>
+          </div>
+      </div>
+      
+      </div> <!-- end of main section -->
+ 
+      <div id="footer">
+        &copy;Copyright 2006 The Seasar Foundation.&nbsp;&nbsp;All rights reserved.
+      </div>
+      
+    </div>
+  </body>
+</html>

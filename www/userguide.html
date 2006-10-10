@@ -1,0 +1,426 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <style type="text/css">
+      <!--
+        @import url(style.css);
+      //-->
+    </style>
+    <title>KikainekoMocker Project Web Site</title>
+  </head>
+  <body>
+    <a name="Top" />
+    <div id="wrapper">
+    
+      <div id="header">
+      <img class="kikaineko" src="img/kikaineko_top.png" alt="kikaineko"/>
+      </div>
+      <div id="main">
+      
+      <h1>KikainekoMocker</h1>
+      <div class="left">
+        
+        <font color="blue" size="2"><b>使<span id="orange">用</span>ガイド</b></font><br/><br/>
+        <div class="desc">
+        ここでは、機械猫モッカーの使用方法を説明します。
+        </div>
+        
+        <h2><span id="orange">目</span>次</h2>
+          <div class="desc">
+          <ul class="dl">
+            <li><a href="#Overview">機械猫モッカー概要</a></li>
+            <li><a href="#GettingStarted">はじめてみよう</a></li>
+            <li><a href="#TestSample">テスト・コードのサンプル</a></li>
+            <li><a href="#HowToTest">テスト・コードの書き方</a></li>
+            <li><a href="#Prerequisites">前提・制約事項</a></li>
+            <li><a href="#TextUI">テキストUIからの実行</a></li>
+          </ul>
+          </div>
+        <br/>
+        
+        
+        <a name="Overview" />
+        <div id="section">機械猫モッカー<span id="orange">概</span>要</div>
+        
+        <h2>機械<span id="orange">猫</span>モッカーとは</h2>
+          <div class="desc">
+          機械猫モッカー (KikainekoMocker) は、SCT (Simulated-Class by Tests) というテスト・ケースから
+          擬似クラスを自動生成する手法を実現するツールです。
+          機械猫モッカーは、JUnit のテスト・ケースを読み、そのテストを通る擬似クラスを生成します。
+          </div>
+        
+        <h2>擬似クラスと<span id="orange">S</span>CT</h2>
+          <div class="desc">
+          未実装クラスや環境などに依存するクラスを開発する場合、擬似クラスを活用する手法が一般的です。
+          擬似クラスとは、モックやスタブ、ドライバなどの名前で知られる
+          「実装は正しくないが、見かけ上は正しいクラスと同じ振る舞いを見せるクラス」のことで、
+          主に開発・テストを容易にするために用いられます。<br/><br/>
+          擬似クラスの使用は有用であるが、擬似クラス自身の作成が困難であり、労力がかかります。
+          対応策として擬似クラス生成用ツールが提供されていますが、
+          それらツールにも以下のような問題が存在します。
+          <ul>
+          <li>擬似クラスの定義方法が難解である （ツール独自 API に依存）</li>
+          <li>擬似クラスの定義コードは最終的に破棄される</li>
+          </ul>
+          <br/>
+          <img src="img/mocktools.jpg">
+          <br/>
+          SCT とは、あるクラスに対するテストをそのクラスの入出力に対する定義であると解釈し、
+          その定義から擬似クラスを自動生成する手法のことです。
+          テスト・コードには、テスト対象のクラスが持つべき外面的な振る舞いが情報として含まれています。
+          SCT ではこの情報を利用して、テストから擬似クラスを生成します。<br/><br/>
+          SCT では、テスト・コードを擬似クラスの定義と捕らえるため、
+          擬似クラスを定義するためのツール独自 API の学習などが不要になります。
+          また、テスト・コードは破棄されず、実クラスに対しても使用可能です。
+          <br/><br/>
+          <img src="img/sct.jpg">
+          <br/>
+          機械猫モッカーは、JUnit のテスト・コードを読み込み、
+          そこから擬似クラスに対する定義を解釈することによって、
+          そのテストを通る擬似クラスを生成する、SCT を実現するツールです。
+          <br/><br/>
+          <a href="#Top">[to top]</a>
+          </div>
+          <br/>
+        
+        
+        <a name="GettingStarted" />
+        <div id="section">はじめ<span id="orange">て</span>みよう</div>
+        
+        <h2>イ<span id="orange">ン</span>ストール</h2>
+          <div class="desc">
+          <ol>
+          <li>機械猫モッカー・プラグインを <a href="http://sourceforge.jp/projects/kikainekomocker/files/">download</a> して、zip ファイルを解凍します。</li>
+          <li>解凍したフォルダーを、eclipse の plugins フォルダーに入れます。</li>
+          </ol>
+          <br/>
+          <img src="img/pluginin1.jpg">
+          <br/><br/>
+          これでプラグイン導入完了です。<br/>
+          これだけで完了って！ Eclipse かっこいいー！<br/>
+          </div>
+          <div class="notice">
+          ※Eclipse を使用せずに、コマンドラインからも使用可能です。
+          </div>
+          
+        <h2>テスト作<span id="orange">成</span></h2>
+          <div class="desc">
+          <ol>
+          <li>プラグインが導入できたら、Eclipse を起動してください。</li>
+          <li>ここでは、サンプルとして 「 KMSample 」 というプロジェクトを作成しましょう。</li>
+          <li>KMSample に sample パッケージを作成します。</li>
+          <li>sample パッケージに CalcTest.java を作成します。</li>
+          <br/><br/>
+          <img src="img/sample2.jpg">
+          <br/><br/>
+          <li>このCalcTest.javaに、「<a href="#TestSample">テスト・コードのサンプル</a>」で例としてあげているテスト・コードを実装します。</li>
+          <li>当然、この段階では Calc クラスは存在しないので、Eclipse に激しく怒られます。</li>
+          <br/><br/>
+          <img src="img/sample3.jpg">
+          <br/><br/>
+          </ol>
+       	  </div>
+	  
+        <h2>機械猫モ<span id="orange">ッ</span>カー実行</h2>
+          <div class="desc">
+          <ol>
+          <li>CalcTest.java を右クリックしてください。</li>
+          <li>[機械猫 Mocker] - [モックの生成]を実行してください。</li>
+          <br/><br/>
+          <img src="img/sample4.jpg">
+          <br/>
+          <li>次のような警告がでますが、気にせず「はい」を押してください。<br/>
+          （2回目以降は表示されません）</li>
+          <br/><br/>
+          <img src="img/sample5.jpg">
+          <br/>
+          <li>すると、Calc.java が生成されています。わーい。</li>
+          <br/><br/>
+          <img src="img/sample6.jpg">
+          <br/><br/>
+          </ol>
+          </div>
+        
+        <h2>テ<span id="orange">ス</span>ト実行</h2>
+          <div class="desc">
+          <ol>
+          <li>最後に CalcTest の JUnit を実行してみましょう。</li>
+          <br/><br/>
+          <img src="img/sample7.jpg">
+          <br/><br/>
+          </ol>
+          ばっちり、緑です！やったー！！
+          <br/><br/>
+          <a href="#Top">[to top]</a>
+          </div>
+          <br/>
+        
+        
+        <a name="TestSample" />
+        <div id="section">テスト・<span id="orange">コ</span>ードのサンプル</div>
+        <h2>機械猫モッカーのためのテス<span id="orange">ト</span>・ケースのサンプル</h2>
+          <div class="desc">
+          機械猫モッカーは JUnit のテスト・ケースをパスする擬似クラスを生成します。<br/>
+          例えば、以下のようなテストをパスする擬似クラスを生成できます。<br/><br/>
+          <table>
+          <tr bgcolor="#FFFFCC"><td>
+          <br/>
+          <pre>
+  package sample;
+  import junit.framework.TestCase;
+
+  public class CalcTest extends TestCase {
+      Calc calc;
+      
+      protected void setUp() throws Exception {
+          super.setUp();
+          calc=new Calc();
+      }
+      
+      public void testGet(){
+          assertEquals(0,calc.get(0,0));
+      }
+
+      public void testAdd(){
+          calc.set("+");
+          assertEquals(5,calc.get(2,3));
+      }
+      
+      public void testAddInteger(){
+          calc.set("+");
+          Integer i20=new Integer(20);
+          Integer i30=new Integer(30);
+          Integer i50=new Integer(50);
+          assertEquals(i50,calc.get(i20,i30));
+      }
+      
+      public void testMulti(){
+          calc.set("*");
+          assertEquals(6,calc.get(2,3));
+      }
+      
+      public void testDiv(){
+          calc.set("/");
+          assertEquals(2,calc.get(4,2));
+      }
+  }
+          </pre>
+          </td></tr>
+          </table>
+          <br/>
+          上記の CalcTest を見ると、プリミティブ型やオブジェクト型を操作できることが分かります。<br/>
+          このように機械猫モッカーは任意の型を操作することが可能です。<br/>
+          （ただし、全ての型を安全に操作できるわけではありません。
+          詳細は「<a href="#Prerequisites">前提・制約事項</a>」を参照してください。）
+          <br/><br/>
+          また、以下のようなテストをパスする擬似クラスを生成することができます。<br/>
+          <br/>
+          <table>
+          <tr bgcolor="#FFFFCC"><td>
+          <br/>
+          <pre>
+  package sample;
+  import junit.framework.TestCase;
+
+  public class TokenTest extends TestCase {
+      Token token;
+      
+      protected void setUp() throws Exception {
+          super.setUp();
+      }
+
+      public void testNext(){
+          token=new Token("a=10*c;");
+          assertEquals("a",token.next());
+          assertEquals("=",token.next());
+          assertEquals("10",token.next());
+          assertEquals("*",token.next());
+          assertEquals("c",token.next());
+          assertEquals(";",token.next());
+      }
+      public void testLength(){
+          token=new Token("a=10*c;");
+          assertEquals("6",token.length());
+      }
+  }
+          </pre>
+          </td></tr>
+          </table>
+          <br/>
+          TokenTest を見ると、同一メソッドを複数回実行していますが、
+          機械猫モッカーはこれも問題なく扱えます。<br/>
+          簡易な擬似クラスでは、1メソッドに1つの返り値しか持たせない場合がありますが、
+          機械猫モッカーは呼び出し順なども考慮して返り値を決定しています。
+          <br/><br/>
+          また、すでに対象となるクラスが存在する場合、
+          既存のコードをすべてコメント・アウトし、擬似コードを書き込みます。
+          <br/><br/>
+          <a href="#Top">[to top]</a>
+          </div>
+          </br>
+        
+        
+        <a name="HowToTest" />
+        <div id="section">テス<span id="orange">ト</span>・コードの書き方</div>
+        
+        <h2>機械猫モッカーのた<span id="orange">め</span>のテスト・ケースの書き方</h2>
+          <div class="desc">
+          機械猫モッカーは通常のテスト・ケースを解析しますが、いくつかテスト・ケースを書く上での
+          ポイントがあります。<br/>
+          細かい内容に関しては、「<a href="#Prerequisites">前提・制約事項</a>」をいっしょにご覧ください。<br/><br/>
+
+          サンプル・プログラムを用いて、簡単なポイントを説明します。<br/>
+          </div>
+          
+        <h2>擬<span id="orange">似</span>クラス対象指定</h2>
+          <div class="desc">
+          機械猫モッカーは、擬似化対象クラス、つまりどのクラスを生成するか、の指定を
+          テスト・ケースのフィールドで判断しています。
+          <br/><br/>
+          <img src="img/test1.jpg">
+          <br/><br/>
+          この場合、機械猫モッカーは Calc.java を生成すると判断します。<br/><br/>
+            <div class="notice">
+            <ul class="dl">
+            <li>指定するフィールドは必ず一つだけにしてください。</li>
+            <li>ここでインスタンス化、null 値代入などはしないで下さい。</li>
+            </ul>
+            </div>
+            <br/>
+          また、ここで「 SomeInterface calc; 」のようにインターフェースを指定すると、
+          そのインターフェースを実装した擬似クラスを生成します。<br/><br/>
+          あるいは、「 SomeSuperClass calc; 」のようにでスーパークラスを指定すると、
+          そのスーパークラスを継承した擬似クラスを生成します。
+          </div>
+          
+        <h2>メソッドの返り値は assert<span id="orange">E</span>quals で設定</h2>
+          <div class="desc">
+          擬似化対象クラスのメソッドが返り値を持つ場合（つまり void 型じゃない場合）
+          は assertEquals で返り値を指定してください。<br/>
+          （当然ですが、void 型は assertEquals に記述しないでください。）
+          <br/><br/>
+          <img src="img/test3.jpg">
+          <br/><br/>
+          assertEquals 以外で、例えば、以下のように記述すると、
+          <table>
+          <tr bgcolor="#FFFFCC"><td>
+          <br/>
+          <pre>
+  int i = calc.get();
+          </pre>
+          </td></tr>
+          </table>
+          機械猫モッカーはどのような値を返せば良いのか判別できないためエラーになります。
+
+          </div>
+
+          
+        <h2>例<span id="orange">外</span>を投げるメソッドの記述</h2>
+          <div class="desc">
+          擬似化対象クラスのメソッドが例外を投げる場合は、
+          try / catch / fail を使用して例外を指定してください。<br/><br/>
+          fail() のひとつ前に記述されているメソッドで例外が発生すると判断します。<br/>
+          fail() 後、最初に catch する Exception を throw すると判断します。
+          <br/><br/>
+          <img src="img/test4.jpg">
+          <br/><br/>
+          この例の場合、calc.set("a") 呼び出し時に、例外 IllegalArgumentException が発生します。<br/><br/>
+          throw する例外はカスタムのものでも指定可能です。
+          <br/><br/>
+          <a href="#Top">[to top]</a>
+          </div>
+          </br>
+                    
+                    
+        <a name="Prerequisites" />
+        <div id="section">前提・制<span id="orange">約</span>事項</div>
+        
+        <h2>前<span id="orange">提</span>事項</h2>
+          <div class="desc">
+          機械猫モッカーは Java1.4 の文法に沿った解析を行いますが、
+          完全ではありません。ここでは細かな差異を示します。<br/><br/>
+          <h3>プリミティブ型</h3>
+          モッカーでは全てのプリミティブ型を扱えません。具体的には、以下の型を扱えません。
+          <ul class="dl">
+          <li>float 型（ 1.0f のような形式以外は対応していません）</li>
+          </ul>
+          </div>
+
+        <h2>テスト・ケース記述に<span id="orange">関</span>する制限事項</h2>
+          <div class="desc">
+          テスト・ケース記述には以下の制限が課せられています。<br/>
+          これらのうちのいくつかは解消されますが、ご注意ください。<br/>
+          <br/>
+
+          <ul class="dl">
+          <li>クラス変数に、擬似化対象のクラスを必ず宣言してください。この宣言で擬似化対象を判断します。<br/>
+               また、必ず setUp メソッドか各 test メソッド内でインスタンス化してください。</li>
+          <li>擬似化対象以外のクラス変数は記述しないでください。</li>
+          <li>返り値があるメソッドは、assertEquals で明示してください。<br/>
+          assertEquals を使用しない場合、void と判断します。</li>
+          <li>assertEquals( expected , actual ) などを使用する場合、必ず期待値、実測値の順に書いてください。</li>
+          <li>擬似化対象の static メソッドには対応できません。</li>
+          <li>多次元配列は使用できません。</li>
+          <li>for 文・ if 文・ while 文・ switch 文などの制御構造文は使用できません。</li>
+          </ul>
+          <br/>
+          <a href="#Top">[to top]</a>
+          </div>
+          <br/>
+          
+        <a name="TextUI" />
+        <div id="section">テキストUIから<span id="orange">の</span>実行</div>
+        
+        <h2>もう一つの機<span id="orange">械</span>猫モッカーの実行方法</h2>
+          <div class="desc">
+          通常機械猫モッカーは Eclipse プラグインから実行されることを想定していますが、
+          テキスト形式から呼び出すことも可能です。<br/>
+          MockMaker クラスを使用します。<br/><br/>
+          具体的には何らかのクラスに以下のmain メソッドを実装して、実行してください。<br/><br/>
+          <table>
+          <tr bgcolor="#FFFFCC"><td>
+          <br/>
+          <pre>
+  public static void main(String[] args){
+    try{
+      String[] ss={"src\\sample\\SampleTest.java"};
+      MockMaker.main(ss);
+    }catch(Throwable t){
+      t.printStackTrace();
+    }
+  }
+          </pre>
+          </td></tr>
+          </table>
+          <br/>
+          文字列配列の ss には対象テスト・ファイルのパスを指定してください。（Eclipse プロジェクトからの相対パスです。）<br/>
+          また、MockMaker クラスは、org.kikaineko.mock.textui パッケージに存在します。
+          <br/><br/>
+          <a href="#Top">[to top]</a>
+          </div>
+          <br/>
+
+      </div> <!-- end of left section -->
+      
+      
+      <div class="right">
+        <h2>Conte<span id="orange">n</span>ts</h2>
+          <div class="desc">
+            <ul>
+              <li><a href="index.html">ホーム</a></li>
+              <li><a href="userguide.html">使用ガイド</a></li>
+              <li><a href="techoverview.html">技術仕様</a></li>
+              <li><a href="http://sourceforge.jp/projects/kikainekomocker/files/">ダウンロード</a></li>
+            </ul>
+          </div>
+      </div>
+      
+      </div> <!-- end of main section -->
+ 
+      <div id="footer">
+        &copy;Copyright 2006 The Seasar Foundation.&nbsp;&nbsp;All rights reserved.
+      </div>
+      
+    </div>
+  </body>
+</html>
