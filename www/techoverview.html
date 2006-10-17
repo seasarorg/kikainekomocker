@@ -22,6 +22,7 @@
         
         <font color="blue" size="2"><b>技術<span id="orange">仕</span>様</b></font><br/><br/>
         <div class="desc">
+        <b>[現在改定中です。]</b><br/><br/>
         ここでは、機械猫モッカーの設計仕様や処理の流れを説明します。<br/><br/>
         これは、機械猫モッカーの開発者向けの情報です。よって、
         機械猫モッカーを使用するだけの場合、ここで記述されている内容を理解する必要はありません。<br/>
@@ -81,17 +82,17 @@
           
           <h3>後期テスト解析</h3>
             次にいよいよテスト解析のメイン部分、後期テスト解析です。<br/>
-            ここで主役となるのは、org.kikaineko.mock.analysis.SmallCompiler クラスです。<br/>
+            ここで主役となるのは、org.kikaineko.mock.analysis.SmallInterpreter クラスです。<br/>
             （これが機械猫モッカーの心臓部です）<br/><br/>
             
-            SmallCompiler クラスは、TestClass を受け取ると TestClass が保持している test メソッドを調べ、 
+            SmallInterpreter クラスは、TestClass を受け取ると TestClass が保持している test メソッドを調べ、 
             setUp メソッド → test メソッドという順番でコードを解析していきます。<br/><br/>
             
-            このとき、SmallCompiler は実際に計算やオブジェクトのインスタンス化などを実行しています。<br/>
+            このとき、SmallInterpreter は実際に計算やオブジェクトのインスタンス化などを実行しています。<br/>
             つまりほぼコンパイラーやインタプリタと同じ解析を行っています。異なるのは、TargetClass の存在です。<br/><br/>
             
             例えば、今 Calc.java の擬似クラスを生成したいとして、Calc calc という変数名を
-            記述している場合 SmallCompiler は calc という名前を見つけるたびに TargetClass にアクセスを行います。<br/><br/>
+            記述している場合 SmallInterpreter は calc という名前を見つけるたびに TargetClass にアクセスを行います。<br/><br/>
             
             この際、calc に対して行われた処理を解析し、Calc が持つべきメソッドを判断します。<br/>
             また、calc に行われた処理を全て history として保持していきます。<br/>
@@ -102,7 +103,7 @@
         <h2>コード<span id="orange">生</span>成</h2>
           <div class="desc">
           最終フェーズです。</br>
-          SmallCompiler クラスが解析した結果を全て TargetClass に記録し、
+          SmallInterpreter クラスが解析した結果を全て TargetClass に記録し、
           それを org.kikaineko.mock.runner.Implementer クラスが受け取りコードを生成します。<br/><br/>
           
           Implementer が行っている処理は、単純です。<br/>
@@ -152,19 +153,20 @@
             <tr bgcolor="#FFFFCC"><td>
             <br/>
             <pre>
-  public int doSomething( java.lang.Object arg0 ) {
-  　<font color="green">//TODO To change.Mock Part Start ...</font>
-  　String[] args = { org.kikaineko.mock.util.ToStringer.get(arg0) };
-  　
-  　<font color="red">//呼出を記録し、その記録を返している (1) </font>
-  　String cond = kikainekoHistoryAdd("doSomething(java.lang.Object )", args, false ;
-  　<font color="red">//呼出記録と一致する返り値を（文字列）で取得 (2,3)</font>
-  　String res = kikainekoReturn ( cond ) ;　
+  public int doSomething(java.lang.Object arg0) {
+   <font color="green">//TODO To change.Mock Part Start ...</font>
+   String[] args = { org.kikaineko.mock.util.ToStringer.get(arg0) };
 
-  　<font color="green">//TODO To change.Mock Part End.</font>
-    
-    <font color="red">//文字列の返り値を解析して、期待される型に変換 (4)</font>
-  　return org.kikaineko.mock.util.ReturnValue.intValue(res);
+ 　<font color="red">//呼出を記録し、その記録を返している (1) </font>
+ 　String cond = kikainekoHistoryAdd(
+ 　                  "doSomething(java.lang.Object)", args, false);
+ 　<font color="red">//呼出記録と一致する返り値を（文字列）で取得 (2,3)</font>
+ 　String res = kikainekoReturn(cond) ;　
+
+ 　<font color="green">//TODO To change.Mock Part End.</font>
+   
+   <font color="red">//文字列の返り値を解析して、期待される型に変換 (4)</font>
+ 　return org.kikaineko.mock.util.ReturnValue.intValue(res);
   }
             </pre>
             </td></tr>
@@ -179,16 +181,16 @@
               <dt>org.kikaineko.mock.util.ToStringer.get( Object )</dt>
                 <dd>引数の Object 型（プリミティブ型を含む）を機械猫モッカーの規則にしたがって文字列に変換します。<br/>
   　　          これは、機械猫モッカー独自のメソッドです。</dd>
-              <dt>String kikainekoHistoryAdd ( String name, String[] args, boolean false )</dt>
+              <dt>String kikainekoHistoryAdd (String name, String[] args, boolean false)</dt>
                 <dd>第一引数の name はメソッドの名前で、args は引数の文字列表現の配列です。<br/>
                 このメソッドは、name メソッドが引数 args で呼ばれたことを kikainekoHistory に
                 記録していくメソッドです。<br/>
                 これは、擬似クラス内に生成されます。</dd>
-              <dt>String kikainekoReturn ( String cond )</dt>
+              <dt>String kikainekoReturn (String cond)</dt>
                 <dd>呼出記録を引数にとって、返り値の文字列表現を取得するメソッドです。<br/>
                 kikainekoRes 配列の要素を返します。<br/>
                 これは、擬似クラス内部に生成されます。</dd>
-              <dt>org.kikaineko.mock.util.ReturnValue.intValue ( String res )</dt>
+              <dt>org.kikaineko.mock.util.ReturnValue.intValue (String res)</dt>
                 <dd>返り値の文字列表現を期待される型に変換するメソッドです。<br/>
                 org.kikaineko.mock.util.ToStringer と逆方向の変換を実行します。<br/>
                 これは、機械猫モッカー独自のメソッドです。</dd>
@@ -218,12 +220,12 @@
               <tr bgcolor="#FFFFCC"><td>
               <br/>
               <pre>
-  assertEquals ( "1", ToStringer.get ( 1 ) );
-  assertEquals ( "1.0", ToStringer.get ( 1.0 ) );
-  assertEquals ( "true", ToStringer.get ( true ) );
-  assertEquals ( "false", ToStringer.get ( false ) );
-  assertEquals ( "test", ToStringer.get ( "test" ) );
-  assertEquals ( "1", ToStringer.get ( new Integer ( 1 ) ) ) ;
+  assertEquals("1", ToStringer.get(1));
+  assertEquals("1.0", ToStringer.get(1.0));
+  assertEquals("true", ToStringer.get(true));
+  assertEquals("false", ToStringer.get(false));
+  assertEquals("test", ToStringer.get("test"));
+  assertEquals("1", ToStringer.get(new Integer(1)));
               </pre>
               </td></tr>
               </table>
@@ -248,7 +250,7 @@
               <tr bgcolor="#FFFFCC"><td>
               <br/>
               <pre>
-  assertEquals ( "1 2 ", ToStringer.get ( new TwoInt ( 1, 2 ) ) ) ;
+  assertEquals("1 2 ", ToStringer.get(new TwoInt(1, 2)));
               </pre>
               </td></tr>
               </table>
@@ -270,6 +272,7 @@
           <div class="desc">
             <ul>
               <li><a href="index.html">ホーム</a></li>
+              <li><a href="introduction.html">機械猫モッカーとは？</a></li>
               <li><a href="userguide.html">使用ガイド</a></li>
               <li><a href="techoverview.html">技術仕様</a></li>
               <li><a href="http://sourceforge.jp/projects/kikainekomocker/files/">ダウンロード</a></li>

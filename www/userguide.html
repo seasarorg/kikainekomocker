@@ -28,7 +28,6 @@
         <h2><span id="orange">目</span>次</h2>
           <div class="desc">
           <ul class="dl">
-            <li><a href="#Overview">機械猫モッカー概要</a></li>
             <li><a href="#GettingStarted">はじめてみよう</a></li>
             <li><a href="#TestSample">テスト・コードのサンプル</a></li>
             <li><a href="#HowToTest">テスト・コードの書き方</a></li>
@@ -37,51 +36,6 @@
           </ul>
           </div>
         <br/>
-        
-        
-        <a name="Overview" />
-        <div id="section">機械猫モッカー<span id="orange">概</span>要</div>
-        
-        <h2>機械<span id="orange">猫</span>モッカーとは</h2>
-          <div class="desc">
-          機械猫モッカー (KikainekoMocker) は、SCT (Simulated-Class by Tests) というテスト・ケースから
-          擬似クラスを自動生成する手法を実現するツールです。
-          機械猫モッカーは、JUnit のテスト・ケースを読み、そのテストを通る擬似クラスを生成します。
-          </div>
-        
-        <h2>擬似クラスと<span id="orange">S</span>CT</h2>
-          <div class="desc">
-          未実装クラスや環境などに依存するクラスを開発する場合、擬似クラスを活用する手法が一般的です。
-          擬似クラスとは、モックやスタブ、ドライバなどの名前で知られる
-          「実装は正しくないが、見かけ上は正しいクラスと同じ振る舞いを見せるクラス」のことで、
-          主に開発・テストを容易にするために用いられます。<br/><br/>
-          擬似クラスの使用は有用であるが、擬似クラス自身の作成が困難であり、労力がかかります。
-          対応策として擬似クラス生成用ツールが提供されていますが、
-          それらツールにも以下のような問題が存在します。
-          <ul>
-          <li>擬似クラスの定義方法が難解である （ツール独自 API に依存）</li>
-          <li>擬似クラスの定義コードは最終的に破棄される</li>
-          </ul>
-          <br/>
-          <img src="img/mocktools.jpg">
-          <br/>
-          SCT とは、あるクラスに対するテストをそのクラスの入出力に対する定義であると解釈し、
-          その定義から擬似クラスを自動生成する手法のことです。
-          テスト・コードには、テスト対象のクラスが持つべき外面的な振る舞いが情報として含まれています。
-          SCT ではこの情報を利用して、テストから擬似クラスを生成します。<br/><br/>
-          SCT では、テスト・コードを擬似クラスの定義と捕らえるため、
-          擬似クラスを定義するためのツール独自 API の学習などが不要になります。
-          また、テスト・コードは破棄されず、実クラスに対しても使用可能です。
-          <br/><br/>
-          <img src="img/sct.jpg">
-          <br/>
-          機械猫モッカーは、JUnit のテスト・コードを読み込み、
-          そこから擬似クラスに対する定義を解釈することによって、
-          そのテストを通る擬似クラスを生成する、SCT を実現するツールです。
-          <br/><br/>
-          <a href="#Top">[to top]</a>
-          </div>
-          <br/>
         
         
         <a name="GettingStarted" />
@@ -279,7 +233,7 @@
           <br/><br/>
           <img src="img/test1.jpg">
           <br/><br/>
-          この場合、機械猫モッカーは Calc.java を生成すると判断します。<br/><br/>
+          この場合、機械猫モッカーは Calc の擬似クラスを生成すると判断します。<br/><br/>
             <div class="notice">
             <ul class="dl">
             <li>指定するフィールドは必ず一つだけにしてください。</li>
@@ -290,7 +244,37 @@
           また、ここで「 SomeInterface calc; 」のようにインターフェースを指定すると、
           そのインターフェースを実装した擬似クラスを生成します。<br/><br/>
           あるいは、「 SomeSuperClass calc; 」のようにでスーパークラスを指定すると、
-          そのスーパークラスを継承した擬似クラスを生成します。
+          そのスーパークラスを継承した擬似クラスを生成します。<br/><br/>
+          <br/>
+          機械猫モッカーが生成する java ファイルは、フィールドが
+          インスタンス化される際の記述を解析し判断します。<br/>
+          例えば、
+          <table>
+          <tr bgcolor="#FFFFCC"><td>
+          <br/>
+          <pre>
+  calc = new Calc();
+          </pre>
+          </td></tr>
+          </table>
+          が記述されている場合、機械猫モッカーは、Calc.java を生成すると判断します。<br/><br/>
+          
+          また、DI (Dependency Injection) やファクトリ・メソッドによって
+          インスタンス化(new)が隠蔽されている場合にも、機械猫モッカーは対応しています。
+          まず機械猫モッカーは、DIやファクトリを実際に実行します。実行に成功し、オブジェクトが返ってきた場合、
+          そのクラス名を取得してそのクラス名の擬似クラスを生成します。<br/>
+          例えば、
+          <table>
+          <tr bgcolor="#FFFFCC"><td>
+          <br/>
+          <pre>
+  HogeInterface hoge;
+  hoge = (HogeInterface)di.getCompornent();
+          </pre>
+          </td></tr>
+          </table>
+　        が記述されているの場合、HogeInterfaceImpl のクラスが生成されます。
+          
           </div>
           
         <h2>メソッドの返り値は assert<span id="orange">E</span>quals で設定</h2>
@@ -408,6 +392,7 @@
           <div class="desc">
             <ul>
               <li><a href="index.html">ホーム</a></li>
+              <li><a href="introduction.html">機械猫モッカーとは？</a></li>
               <li><a href="userguide.html">使用ガイド</a></li>
               <li><a href="techoverview.html">技術仕様</a></li>
               <li><a href="http://sourceforge.jp/projects/kikainekomocker/files/">ダウンロード</a></li>
