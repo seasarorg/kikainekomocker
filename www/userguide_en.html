@@ -6,7 +6,7 @@
         @import url(style.css);
       //-->
     </style>
-    <title>KikainekoMocker - User Guide</title>
+    <title>KikainekoMocker Project Web Site</title>
   </head>
   <body>
     <a name="Top" />
@@ -116,8 +116,8 @@
         <div id="section">Test Co<span id="orange">d</span>e Sample</div>
         <h2>A Sample Test Case for Kikai<span id="orange">n</span>ekoMocker</h2>
           <div class="desc">
-          KikaienkoMocker generates a pseudo-class which passes a JUnit test case.<br/>
-          For example, it is possibe to generate a pseudo-class which passes the 
+          KikaienkoMocker generates a simulated-class which passes a JUnit test case.<br/>
+          For example, it is possibe to generate a simulated-class which passes the 
           following test case.<br/><br/>
           <table>
           <tr bgcolor="#FFFFCC"><td>
@@ -170,7 +170,7 @@
           (Refer to "<a href="#Prerequisites">Prerequisites &amp; Constraints</a>" for 
           detailed description of supported data types.)
           <br/><br/>
-          Also, it is possibe to generate a pseudo-class which passes the 
+          Also, it is possibe to generate a simulated-class which passes the 
           following test case.<br/><br/>
           <table>
           <tr bgcolor="#FFFFCC"><td>
@@ -209,8 +209,8 @@
           With some tools, you can only define one return value per method, but 
           KikainekoMocker decide the return value according to the method's execution order.
           <br/><br/>
-          When the pseudo-class to generate already exists, KikanekoMocker comments out the 
-          existing code and writes the pseudo code.
+          When the simulated-class to generate already exists, KikanekoMocker 
+          comments out the existing code and writes the new simulated code.
           <br/><br/>
           <a href="#Top">[to top]</a>
           </div>
@@ -229,14 +229,14 @@
           Some pointers in writing test cases for KikainekoMocker will be explained.<br/>
           </div>
           
-        <h2>Defining the Pseudo-<span id="orange">C</span>lass for Generation</h2>
+        <h2>Defining the Simulated-<span id="orange">C</span>lass for Generation</h2>
           <div class="desc">
-          KinkainekoMocker judges which class to generate as the pseudo-class by the 
+          KinkainekoMocker judges which class to generate as the simulated-class by the 
           fiels of the test case.
           <br/><br/>
           <img src="img/test1.jpg">
           <br/><br/>
-          In this case, the pseudo-class Calc is generated.<br/><br/>
+          In this case, the simulated-class Calc is generated.<br/><br/>
             <div class="notice">
             <ul class="dl">
             <li>Only define one field.</li>
@@ -245,9 +245,9 @@
             </div>
             <br/>
           If an interface such as "<code>SomeInterface calc;</code>" is specified, 
-          a pseudo-class which implements that class is generated.<br/><br/>
+          a simulated-class which implements that class is generated.<br/><br/>
           If a superclass such as "<code>SomeSuperClass calc;</code>" is specified, 
-          a pseudo-class which extends that class is generated.<br/><br/>
+          a simulated-class which extends that class is generated.<br/><br/>
           <br/>
           The java file to generate is determined from the instantiation of the defined field.<br/>
           For example, when the following is written in the test case, 
@@ -266,7 +266,7 @@
           factory methods.<br/>
           KikainekoMocker executes the DI or factory method.  If it succeeds and 
           an object is returned, KikainekoMocker retrieves the class name, 
-          using it for the pseudo-class to generate.<br/>
+          using it for the simulated-class to generate.<br/>
           For example, whent the following is written in the test case, 
           KikainekoMocker generates HogeInterfaceImpl.java.
           <table>
@@ -283,7 +283,7 @@
           
         <h2>Define the Result of a Method with "assert<span id="orange">E</span>quals"</h2>
           <div class="desc">
-          If a method of a pseudo-class has a return value, specify it with 
+          If a method of a simulated-class has a return value, specify it with 
           "<code>assertEquals()</code>".<br/>
           (Do not use <code>assertEquals()</code>, if the method does not have a return 
           value, i.e. void return type.)
@@ -306,8 +306,8 @@
           
         <h2>Throwing Exce<span id="orange">p</span>tions</h2>
           <div class="desc">
-          When a method of the pseudo-class throws an exception, use <code>try</code> / 
-          <code>catch</code> / <code>fail</code> statements.
+          When a method of the simulated-class throws an exception, 
+          use <code>try</code> / <code>catch</code> / <code>fail</code> statements.
           KikainekoMocker determined that the method written before the 
           <code>fail()</code> statement, throws an exception.  KikainekoMocker 
           determines that the first exception caught in the <code>catch</code> 
@@ -345,16 +345,16 @@
           Some of these constraints will be resolved in the future.<br/><br/>
 
           <ul class="dl">
-          <li>Declare the pseudo-class to be generated as a class field.  With 
-          this declaration, KikainekoMocker determines the pseudo-class.<br/>
+          <li>Declare the simulated-class to be generated as a class field.  With 
+          this declaration, KikainekoMocker determines the simulated-class.<br/>
           Instantiate the class in the <code>setUp()</code> or each test method.</li>
-          <li>Do not declare fields other than the target pseudo-class.</li>
+          <li>Do not declare fields other than the target simulated-class.</li>
           <li>Indicate the result to return with <code>assertEquals()</code>.<br/>
           When <code>assertEquals()</code> is not used, KikainekoMocker 
           determines the method returns a void result.</li>
           <li>When using <code>assertEquals(Object, Object)</code>, please write 
           in the order of expected value and actual value.</li>
-          <li>Does not support static methods of the pseudo-class.</li>
+          <li>Does not support static methods of the simulated-class.</li>
           <li>Cannot use multidimensional arrays.</li>
           <li>Cannot use control flow statements such as <code>for</code>, 
           <code>if</code>, <code>while</code>, and <code>switch</code>.</li>
