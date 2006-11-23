@@ -1,0 +1,162 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <style type="text/css">
+      <!--
+        @import url(style.css);
+      //-->
+    </style>
+    <title>KikainekoMocker Project Web Site</title>
+  </head>
+  <body>
+    <a name="Top" />
+    <div id="wrapper">
+    
+      <div id="header">
+      <img class="kikaineko" src="img/kikaineko_top.png" alt="kikaineko"/>
+      </div>
+      <div id="main">
+      
+      <h1>KikainekoMocker</h1>
+      <div class="left">
+        
+        <font color="blue" size="2"><b>モッカーが動<span id="orange">か</span>ないときの対処方法アレコレ</b></font><br/><br/>
+        <div class="desc">
+        ここでは、機械猫モッカーを使おうとしたけど「上手く動かん！！」という場合の対処方法を記述します。
+        </div>
+        
+        <h2><span id="orange">目</span>次</h2>
+          <div class="desc">
+          <ul class="dl">
+            <li><a href="#shoujou">どんな症状がでてますか？</a></li>
+            <li><a href="#install">インストール対処法</a></li>
+            <li><a href="#shinogi">それでも動かん場合</a></li>
+          </ul>
+          </div>
+        <br/>
+        
+        
+        <a name="shoujou" />
+        <div id="section">どんな<span id="orange">症</span>状がでてますか？</div>
+        <div class="desc">
+        ここではモッカーが動かない状態から対初方法を見ていきましょう。以下の症状に該当するリンク先に飛んでください。
+        <ul class="dl">
+            <li><a href="#notfound">Testクラスを右クリックしても「機械猫モッカー」が出ない！</a></li>
+            <li><a href="#error">機械猫モッカーの実行中にエラーが起きる！</a></li>
+            <li><a href="#red">機械猫モッカーの吐いたクラスを実行してもレッドのままだ！</a></li>
+          </ul>
+        </div>
+        <a name="notfound" /><br/>
+        <h2>Testクラスを<span id="orange">右</span>クリックしても「機械猫モッカー」が出ない！</h2>
+          <div class="desc">
+          この症状で最も多いのは、「Testクラス以外を右クリックしていた」というものです。
+          <br/>
+          <font color="blue"><b>
+          <ul class="dl">
+          <li>対象のクラスの名前が「***Test」とTestという名前で終わっているかどうか確認してください</li>
+          <li>対象のクラスが「TestCase」を継承しているかどうか確認してください</li>
+          </ul>
+          </b></font>
+          <br/><br/>
+          Testクラスを正しく指定しているにも関わらず、「機械猫モッカー」が出てこない場合は、恐らく機械猫モッカーのインストールに失敗しています。<br/>
+          以下のことを確認＆試し見てください。<br/>
+          <br/>
+          <font color="blue"><b>★正しくpluginsフォルダーに配置されていますか？</b></font><br/>
+          　・ダウンロードしたzipのまま配置していませんか？<br/>
+          　　→zipを解凍したフォルダを配置してください。<br/>
+          　・該当のpluginsに配置していますか？<br/>
+          　　→複数のEclipseが存在する場合、間違ったpluginsに配置することがあります。<br/>
+          <br/>
+          <font color="blue"><b>★JDK、Eclipseのバージョンは古くないですか？</b></font><br/>
+          　→機械猫モッカーはJDK1.4以上、Eclipse3.2を基本環境として検証しています。<br/>
+          　　ただEclipse3.1でも動作可能であることは確認していますが、Eclipse2以前の環境では恐らくpluginが正しく動作しません。<br/>
+          　　その場合はすいませんが、JDK、Eclipseともにバージョンをあげてください。<br/>
+          <br/>
+          <br/>
+          それでも上手くいかない場合は、<a href="#install">インストール対処法</a>を試してみてください。
+          </div><br/>
+        <a name="error" /><br/>
+        <h2>機械猫<span id="orange">モ</span>ッカーの実行中にエラーが起きる！</h2>
+          <div class="desc">
+          このような症状が起きる原因は、大きく2つに分けるとplugin側の原因である場合とテストケースの記述が妥当ではない場合です。<br/>
+          <br/>
+          <font color="blue"><b>★テストケースの記述が妥当でない</b></font><br/>
+          テストケースの記述に関してはモッカーの制約などを参照し、修正してください。
+          記述が許されていないテストケースの書き方を行うと、例外を投げて処理が中断されますので、注意してください。<br/>
+          <br/>
+          <font color="blue"><b>★plugin側が原因</b></font><br/>
+          pulgin側が原因である場合、多くの場合は正しくインストールされていないことが原因です。<br/>
+          <a href="#install">インストール対処法</a>を試してみてください。
+          </div><br/>
+        <a name="red" /><br/>
+        <h2>機械猫<span id="orange">モ</span>ッカーの吐いたクラスを実行してもレッドのままだ！</h2>
+          <div class="desc">
+          この症状の最も多いパターンは、JUnitのassertEqualsの実装が原因の場合です。
+          その他の原因としては、モッカーが正しくコードを生成できなかった場合とに分かれます。<br/>
+          <br/>
+          <font color="blue"><b>★Junitが原因</b></font><br/>
+          JUnitのassertEqualsの実装が原因の場合というのは、モッカーが吐いた擬似クラスは正しく動作しているけれどもテストが失敗する場合です。<br/>
+          これはassertEqualsにオブジェクト型のデータを突っ込んだ際に起こります。
+          デフォルトのassertEqualsの実装では引数がオブジェクト型の場合、単純にオブジェクト型のequalsメソッドを呼び出すだけです。
+          そして、デフォルトのequalsメソッドの実装はhashCodeの比較を行っているだけですので、通常equalsメソッドをオーバーライドしていないオブジェクトは失敗します。<br/>
+          これを回避することはできません。テストケースを書き換えるか、何とかしてequalsメソッドを書き換えるかする必要があります。
+          あるいは、Testはredのままでも問題なくオブジェクトを生成していますので、redを無視したまま擬似クラスを使用することもできます。
+          <br/><br/>
+          <font color="blue"><b>★モッカーが原因</b></font><br/>
+          モッカーはまれに何のエラーも吐かずに正しく動作しないコードを吐くことがあります。<br/>
+          これは、モッカーが許可していないテストの記述を行っている場合に起こります。モッカーが許可していないテストの記述は多くの場合モッカーがエラーであることを通知しますが
+          まれに、エラーが起きず解析が通ってしまうことがあります。これはモッカーがコード生成速度を確保するためにあまり厳密なチェックを行っていないためです。<br/>
+          この場合の回避方法はモッカーが許可しているテストケースの書き方に修正してください。
+          </div><br/>
+          
+        <a name="install" /><br/>
+        <div id="section">イン<span id="orange">ス</span>ストール対処法</div>
+          <div class="desc">
+          インストールに失敗した場合の多くは、バージョンの古いモッカーへの参照が残っている場合です。<br/>
+          まずはプロジェクトに古い参照が残っていないか確認してください。<br/>
+          <br/>
+          そして、以下の方法でEclipseを起動してください。<br/>
+          <ol>
+          <li>eclipse.exeを右クリックし、eclipse.exeへのショートカットを作成します</li>
+          <li>作成したショートカットのプロパティを開きます</li>
+          <li>プロパティの中のリンク先に「-clean」を追記します。（例：「C:\eclipse\eclipse.exe -clean」）</li>
+          <li>ショートカットをダブルクリックしてEclipseを起動します</li>
+          </ol>
+          <br/>
+          まぁ早い話が、「-clean」を付けてExlipseを起動するだけなんですが。。。
+          </div><br/>
+          
+         <a name="shinogi" /><br/>
+        <div id="section">それでも<span id="orange">動</span>かん場合</div>
+          <div class="desc">
+          どうしても動かない場合は、恐らくプラグイン側のバグです。
+          この場合はMLで質問していただくか開発者の<a href="http://d.hatena.ne.jp/kikaineko">ブログ</a>に書き込むかしてコンタクトしてださい。<br/>
+          <br/>
+          また問題が解決するまではすいませんがplugin側からの呼び出しを避け、<a href="textui.html">テキストUIから呼び出す方法</a>を試しください。
+          </div>
+<br/><br/>
+      </div> <!-- end of left section -->
+      
+      
+      <div class="right">
+        <h2>Conte<span id="orange">n</span>ts</h2>
+          <div class="desc">
+            <ul>
+              <li><a href="index.html">ホーム</a></li>
+              <li><a href="introduction.html">機械猫モッカーとは？</a></li>
+              <li><a href="userguide.html">使用ガイド</a></li>
+              <li><a href="techoverview.html">技術仕様</a></li>
+              <li><a href="http://sourceforge.jp/projects/kikainekomocker/files/">ダウンロード</a></li>
+            </ul>
+          </div>
+      </div>
+      
+      </div> <!-- end of main section -->
+ 
+      <div id="footer">
+        &copy;Copyright 2006 The Seasar Foundation.&nbsp;&nbsp;All rights reserved.
+      </div>
+      
+    </div>
+  </body>
+</html>
