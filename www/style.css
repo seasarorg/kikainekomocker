@@ -34,11 +34,6 @@ body
 
 h1
 {
-  display:none;
-}
-
-h2
-{
   color:#333;
   border-bottom:2px solid #fc6;
   font-size:small;
@@ -46,73 +41,30 @@ h2
   padding-left:3px;
 }
 
-h3
+h2
 {
   border-bottom:1px dashed #fc6;
   margin:7px 0px 7px 0px;
   font-weight:bold;
   font-size:x-small;
+  padding-left:6px;
 }
 
-h4
+h3
 {
-  border-bottom:solid 2px #999;
-  margin-top:8px;
-  margin-bottom:8px;
-  font-size:larger;
-}
-
-h5
-{
-  margin-top:8px;
-  margin-bottom:8px;
-  font-size:larger;
-}
-
-table
-{
-  color:#333;
-  background-color:#fff;
+  border-bottom:1px dotted #fc6;
+  margin:7px 0px 7px 0px;
+  font-weight:bold;
   font-size:x-small;
-  width:440px;
+  padding-left:3px;
 }
 
-table tr.published
-{
-  background-color:#ccc;
-}
-
-table th
-{
-  color:#000;
-  background-color:#ce6;
-  font-size:x-small;
-  white-space:nowrap;
-  padding:3px;
-}
-
-table td
-{
-  /* white-space:nowrap; */
-  border-top:ridge 1px #aaa;
-  border-right:ridge 1px #333;
-  border-bottom:ridge 1px #333;
-  border-left:ridge 1px #aaa;
-  padding:2px;
-}
-
-
-table td ul li
-{
-  margin-left:7px;
-}
-
-#orange
+.orange
 {
   color:#c30;
 }
 
-#update
+.update
 {
   /* background:#fc6; */
   font-size:xx-small;
@@ -143,37 +95,6 @@ table td ul li
   padding-bottom:20px;
 }
 
-#title
-{
-  color:#333;
-  /* float:left; */
-  font-weight:bold;
-  /* margin-right:20px; */
-  padding-top:8px;
-  padding-left:10px;
-}
-
-#menu
-{
-  /* float:left; */
-  font-size:smaller;
-  height:auto;
-  padding-top:8px;
-}
-
-#menu ul
-{
-  list-style:none;
-  margin-left:10px;
-  margin-right:auto;
-}
-
-#menu ul li
-{
-  float:left;
-  margin-right:7px;
-}
-
 #main
 {
   /* border-top:solid 1px #999; */
@@ -183,7 +104,7 @@ table td ul li
   padding-top:8px;
 }
 
-#main div.left
+#left
 {
   /* border-right:solid 1px #aaa; */
   float:left;
@@ -191,19 +112,24 @@ table td ul li
   width:450px;
 }
 
-#main div.left ul
+#left ul
 {
   margin-left:15px;
 }
 
-#main div.left ul.dl
+#left ol
+{
+  margin-left:15px;
+}
+
+#left ul.dl
 {
   margin-left:20px;
   margin-top:8px;
   margin-bottom:8px;
 }
 
-#main div.right
+#right
 {
   border:ridge 1px #aaa;
   margin-left:480px;
@@ -211,58 +137,71 @@ table td ul li
   width:260px;
 }
 
-#main div.right h2
+#right h1
 {
   border-style:none;
 }
 
-#main div.right ul
+#right ul
 {
   list-style:square;
-  margin:8px 0px 8px 30px;
+  margin:8px 0px 8px 15px;
 }
 
-#main div.date
+.date
 {
   font-size:x-small;
 }
 
-#main div.desc
+.release
 {
-  font-size:smaller;
+  font-weight:bolder;
+  color:red;
+}
+
+.releaseOld
+{
+  font-weight:bolder;
+}
+
+.strong
+{
+ font-weight:bolder;
+}
+
+#main p
+{
+ margin-top:10px;
+ margin-bottom:10px;
+}
+
+.desc
+{
+  font-size:x-small;
   padding:8px;
   padding-right:20px;
 }
 
-#main div.desc p.dlheader
+.code
 {
-  margin-top:5px;
-  margin-bottom:3px;
-  /* text-decoration:underline; */
+  border:ridge 1px #aaa;
+ font-family: cursive, sans-serif, serif;
+ margin:7px 0px 7px 0px;
+ padding:5px 5px 5px 5px;
+ background-color : #FFFFCC;
 }
 
-#main div.desc p.smaller
+.code span.comment
 {
-  font-size:small;
+  color:green;
 }
 
-#main div.desc p.thumbnail
+.code span.command
 {
-  margin:7px 0px 7px 0px;
+  color:red;
 }
 
-#main div.desc p.code
-{
-  font-family:monospace;
-  margin:7px 0px 7px 0px;
-}
-
-#main div.desc a.largeImage
-{
-  border-style:none;
-}
-
-#main div.notice
+.notice
 {
   background-color:#efc;
   border:groove 2px #ccc;
@@ -270,31 +209,6 @@ table td ul li
   padding:6px 10px 6px 10px;
   margin-top:3px;
   margin-bottom:3px;
-}
-
-#main ol
-{
-  margin-top:7px;
-  margin-left:20px;
-}
-
-#main dl
-{
-  border:solid 1px #999;
-  margin-top:7px;
-  margin-bottom:7px;
-  padding:5px;
-}
-
-#main dt
-{
-  font-size:normal;
-  margin-top:3px;
-}
-
-#main dd
-{
-  margin-left:12px;
 }
 
 #main a:link,
@@ -315,14 +229,29 @@ table td ul li
   text-align:center;
 }
 
-#section
+#title
 {
-  clear:both;
-  color:#FFFFFF;
-  background:#0000FF;
-  border:solid 1px #333;
-  padding-left:5px;
+  border-bottom:4px solid #fc6;
   font-weight:bold;
   font-size:normal;
-  text-align:left;
+}
+
+.language
+{
+  font-size:x-small;
+  text-align:right;
+}
+
+#main dl
+{
+  border:solid 1px #999;
+  font-size:xx-small;
+  margin-top:7px;
+  margin-bottom:7px;
+  padding:5px;
+}
+
+#main dd
+{
+  margin-left:12px;
 }
