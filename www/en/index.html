@@ -10,20 +10,198 @@
   </head>
   <body>
     <div id="wrapper">
- 
+      
       <div id="header">
         <img class="kikaineko" src="img/kikaineko_top.png" alt="KikainekoMocker Project Web Site"/>
         <p class="language"><a href="../index.html">Japanese</a></p>
       </div>　<!-- end of header section -->
       
       <div id="main">
-      <p>*** Currently Under Construction. ***</p>
-      </div>
+      
+        <div id="left">
+
+
+
+        <h1>KikainekoMocker：<br/>A Tool which <span class="orange">G</span>enerates Classes from Test Codes</h1>
+        <span class="update"><img src="img/date-update-transparent.gif"/>&nbsp;2007/01/01</span>
+          
+          <div class="desc">
+            <p>
+            KikainekoMocker is a tool which enables simple generatation of 
+            pseudo-classes (mocks, stubs, etc.) from test cases.<br/>
+            To begin with, please refer to <a href="introduction.html">"What can KikainekoMocker do?"</a>
+            </p>
+            <p>
+            KikainekoMocker reads JUnit 3.1 test cases, and generates pseudo-classes, 
+            which pass the test case.
+            </p>
+            <p>
+            KikainekoMocker is tested under the following platform:
+            <ul>
+            <li>JDK 1.4 and over</li>
+            <li>Eclipse 3.2</li>
+            </ul>
+            </p>
+            <div class="notice">
+            <ul>
+            <li>KikainekoMocker is currently being developed with the support of IPA Exploratory Software Project.</li>
+            </ul>
+            </div>
+          </div>  <!-- end of desc section -->
+
+
+
+        <h1>NEW<span class="orange">S</span></h1>
+        <span class="update"><img src="img/date-update-transparent.gif"/>&nbsp;2007/01/01</span>
+        
+          <div class="desc">
+            <p>
+            <span class="date">[2006/12/19]</span><br/>
+            <span class="release">[Release] KikainekoMocker 1.0.1</span>
+            </p>
+            <p>
+            A fix version of the following bugs: <br/>
+            * An error ocurrs when casting an object was detected.
+            </p>
+            <br/>
+            
+            <p>
+            <span class="date">[2006/12/02]</span><br/>
+            <span class="release">[Release]KikainekoMocker 1.0</span>
+            </p>
+            <p>
+            KikainekoMocker v1.0 has been released for upgrade.
+            The following features has been added.  Official documents will be released later on.<br/>
+            The problem with the plugin has been resolved.<br/>
+            If problems still occur, please refer to <a href="taisho.html">"Dealing with KikainekoMocker Problems"</a>
+            </p>
+      	    <ul>
+              <li>Support control flow statements (if,for,while,do-while)</li>
+              <li>Support indeterminate values</li>
+              <li>Allow declaring of fields</li>
+              <li>Relaxation of the restrictions on "Assert"</li>
+              <li>Beyond the Test (Extending the internal behavior the pseudo-class)</li>
+                <ul>
+                  <li>Judgement of side-effect method</li>
+                  <li>Change in conserving history</li>
+                </ul>
+            </ul>
+            <br/>
+            
+            <p>
+            <span class="date">[2006/9/3]</span><br/>
+            <span class="releaseOld">[Error Report] When executing from the plugin, an       UnsupportedClassVersionError sometimes occurs.</span>
+            </p>
+            <p>
+            Probably, due to different JDK version of compling the plugin and the Kikaineko runtime.  Planning to deal with it ASAP. <br/>
+            Until then, please use KikainekoMocker throught the <a href="userguide.html#TextUI">Text UI</a>.
+            </p>
+            <br/>
+            
+            <p>
+            <span class="date">[2006/7/26]</span><br/>
+	          <span class="releaseOld">[Release] KikainekoMocker 0.9.6</span>
+            </p>
+            <p>
+            The following are the main changes:
+            <ul>
+	            <li>Class Load Feature</li>
+	            <li>Change in Style of Saving Objects</li>
+            </ul>
+            </p>
+          </div>  <!-- end of desc section -->
+
+
+
+        <h1>Dow<span class="orange">n</span>load</span></h1>
+        <span class="update"><img src="img/date-update-transparent.gif"/>&nbsp;2007/01/01</span>
+          
+          <div class="desc">
+          <p>
+          Please <a href="http://sourceforge.jp/projects/kikainekomocker/files/">download</a> from SourceForge.
+          </p>
+          </div>  <!-- end of desc section -->
+
+
+
+        <h1>Documenta<span class="orange">t</span>ion</h1>
+        <span class="update"><img src="img/date-update-transparent.gif"/>&nbsp;2007/01/01</span>
+        
+          <div class="desc">
+          <p>* Documentation is in preparation.  Upon completion, the documentation will be released.</p>
+            <ul class="dl">
+              <li><a href="introduction.html">What can KikainekoMocker do?</a><br/>
+                  Start here.  Read this section for the overview of KikainekoMocker.</li>
+              <li><a href="userguide.html">How do you use KikainekoMocker?</a><br/>
+                  Read the User Guide to learn how to use Kikaneko Mocker.</li>
+              <li><a href="techoverview.html">How does KikainekoMocker work?</a><br/>
+                  Users needing to become experts or wanting to help develop Kikaineko Mocker consult the Technology Overview.</li>
+              <li><a href="taisho.html">Dealing with KikainekoMocker Problems</a><br/>
+                  Read this section to deal with with KikainekoMocker problems, such as installing.</li>
+            </ul>
+          </div>  <!-- end of desc section -->
+
+
+
+          <h1>Ro<span class="orange">a</span>dmap</h1>
+          <span class="update"><img src="img/date-update-transparent.gif"/>&nbsp;2007/01/01</span>
+            
+            <div class="desc">
+              <ul class="dl">
+                <li><a href="releases.html">Releases</a></li>
+              </ul>
+            </div>  <!-- end of desc section -->
+
+
+
+          <h1>Special <span class="orange">T</span>hanks</h1>
+            <div class="desc">
+              <p>Tsunenaga Hanyuda: For making the KikainekoMocker character.</p>
+              <p>
+              <a href="http://sourceforge.jp/"><img src="http://sourceforge.jp/sflogo.php?group_id=1604" width="96" height="31" border="0" alt="SourceForge.jp"></a>
+              </p>
+              <p><a href="http://www.ipa.go.jp/jinzai/esp/">IPA Exploratory Software Project</a></p>
+            </div>  <!-- end of desc section -->
+
+
+        </div>  <!-- end of left section -->
+      
+        <div id="right">
+        
+        <h1>Licen<span class="orange">s</span>e</h1>
+        
+          <div class="desc">
+            <p>KikainekoMocker is distributed under <br/>
+            <a href="http://www.apache.org/licenses/LICENSE-2.0">The Apache Software License (Version 2.0)</a><br/>
+          </div>  <!-- end of desc section -->
+        
+        <h1>Project Member<span class="orange">s</span></h1>
+          
+          <div class="desc">
+            <p>
+            KikainekoMocker Project is a Sandbox project of <a href="http://www.seasar.org/">The Seasar Foundation</a>.
+            </p>
+            <p>This Project is developed by the following members.
+              <ul class="dl">
+                <li>Masayuki Ioki (Project Leader)</li>
+                <li>Hironobu Kohno (Plugin Developer)</li>
+              </ul>
+            </p>
+            <p class="small">
+            Click <a href="https://www.seasar.org/mailman/listinfo/kikainekomocker">here</a> for the mailing list.<br/>
+            Please submit comments and questions to the mailing list.<br/>
+            People who want to help develop KikainekoMocker, please send a request to the mailing list.
+            </p>
+          </div>  <!-- end of desc section -->
+
+        </div>  <!-- end of right section -->
+      
+      </div>  <!-- end of main section -->
  
       <div id="footer">
         &copy;Copyright 2006 The Seasar Foundation.&nbsp;&nbsp;All rights reserved.
       </div>
       
-    </div>
+    </div>  <!-- end of wrapper section -->
   </body>
 </html>
