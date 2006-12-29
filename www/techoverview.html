@@ -179,15 +179,15 @@ public int doSomething(java.lang.Object arg0) {
   <span class="comment">//TODO To change.Mock Part Start ...</span>
   String[] args = { org.kikaineko.mock.util.ToStringer.get(arg0) };
 
-  <span class="command">//呼出を記録し、その記録を返している (1) </span>
+  <span class="description">//呼出を記録し、その記録を返している (1) </span>
   String cond = kikainekoHistoryAdd(
                   "doSomething(java.lang.Object)", args, false);
-  <span class="command">//呼出記録と一致する返り値を（文字列）で取得 (2,3)</span>
+  <span class="description">//呼出記録と一致する返り値を（文字列）で取得 (2,3)</span>
   String res = kikainekoReturn(cond) ;　
 
   <span class="comment">//TODO To change.Mock Part End.</span>
    
-  <span class="command">//文字列の返り値を解析して、期待される型に変換 (4)</span>
+  <span class="description">//文字列の返り値を解析して、期待される型に変換 (4)</span>
   return org.kikaineko.mock.util.ReturnValue.intValue(res);
 }</pre>
               ※赤字のコメントが説明用に追加したもので、それ以外は実際にモッカーが生成するコードです。

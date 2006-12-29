@@ -1,0 +1,105 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <style type="text/css">
+      <!--
+        @import url(style.css);
+      //-->
+    </style>
+    <title>KikainekoMocker Project Web Site</title>
+  </head>
+  <body>
+    <a name="Top" />
+    <div id="wrapper">
+    
+      <div id="header">
+        <img class="kikaineko" src="img/kikaineko_top.png" alt="KikainekoMocker Project Web Site"/>
+        <p class="language"><a href="en/index.html">English</a></p>
+      </div>　<!-- end of header section -->
+      
+      <div id="main">
+      
+      <div id="left">
+        
+        <h1>擬似クラスと<span id="orange">S</span>CT</h1>
+          <div class="desc">
+            <p>
+            未実装クラスや環境などに依存するクラスを開発する場合、擬似クラスを活用する手法が一般的です。
+            擬似クラスとは、モックやスタブ、ドライバなどの名前で知られる
+            「実装は正しくないが、見かけ上は正しいクラスと同じ振る舞いを見せるクラス」のことで、
+            主に開発・テストを容易にするために用いられます。
+            </p>
+            <p>
+            擬似クラスの使用は有用ですが、擬似クラス自身の作成が困難であり、労力がかかります。
+            対応策として擬似クラス生成用ツールが提供されていますが、
+            それらツールにも以下のような問題が存在します。
+            </p>
+            <ul>
+            <li>擬似クラスの定義方法が難解である （ツール独自 API に依存）</li>
+            <li>擬似クラスの定義コードは最終的に破棄される</li>
+            </ul>
+            <p><img src="img/mocktools.jpg"></p>
+            <p>
+            例えば、上記図のように、クラスAがクラスBに依存しており、
+            クラスAの開発やテスト時にクラスBが未実装の場合、
+            擬似クラスを一般的に活用します。
+            擬似クラスの作成負荷を軽減するために、擬似クラス生成用のツールが考えられますが、
+            従来の擬似クラス生成ツールでは、ツールが提供する API に依存する
+            擬似クラス定義コードを作成する必要があります。<br/>
+            擬似クラスに対する定義コードは、
+            擬似クラスを生成するという目的以外に使用されないため、
+            擬似クラスが本物のクラスに置き換わった時点で、破棄されてしまいます。
+            つまり、擬似クラス作成のために余分なコストを払うことになります。
+            </p>
+            <p>
+            SCT とは、あるクラスに対するテストをそのクラスの入出力に対する定義であると解釈し、
+            その定義から擬似クラスを自動生成する手法のことです。
+            テスト・コードには、テスト対象のクラスが持つべき外面的な振る舞いが情報として含まれています。
+            SCT ではこの情報を利用して、テストから擬似クラスを生成します。
+            </p>
+            <p>
+            下の図で示すとおり、SCT では、テスト・コードを擬似クラスの定義コード
+            と捕らえるため、擬似クラスを定義するためのツール独自 API 
+            の学習などが不要になります。
+            また、擬似クラスが本物のクラスに置き換わった時点でも、
+            擬似クラス定義コード自体がテストであるため、破棄されません。
+            本来作成されるテスト・コードが有効活用されます。
+            </p>
+            <p><img src="img/sct.jpg"></p>
+            <p>
+            機械猫モッカーは、SCT の概念のもと JUnit のテスト・コードを読み込み、
+            擬似クラスを生成します。一般に用いられるテスティング・フレームワークである
+            xUnit 系のテストの記述は比較的容易で、擬似クラスの直感的定義が可能です。
+            認知度の高い JUnit を使用することで、擬似クラス定義コードに対する学習コストを
+            抑えることが可能です。<br/>
+            機械猫モッカーは、JUnit のテスト・コードから擬似クラスに対する定義を
+            解釈することによって、そのテストを通る擬似クラスを生成する、
+            SCT を実現するツールです。
+            </p>
+          </div>  <!-- end of desc section -->
+
+      </div>  <!-- end of left section -->
+      
+      
+      <div id="right">
+        <h1>Conte<span class="orange">n</span>ts</h1>
+        <div class="desc">
+          <ul>
+            <li><a href="index.html">ホーム</a></li>
+            <li><a href="introduction.html">何ができるのか</a></li>
+            <li><a href="userguide.html">どのように使うのか</a></li>
+            <li><a href="techoverview.html">どのように動いているのか</a></li>
+            <li><a href="http://sourceforge.jp/projects/kikainekomocker/files/">ダウンロード</a></li>
+          </ul>
+        </div>
+      </div>  <!-- end of right section -->
+      
+      </div> <!-- end of main section -->
+ 
+      <div id="footer">
+        &copy;Copyright 2006 The Seasar Foundation.&nbsp;&nbsp;All rights reserved.
+      </div>
+      
+    </div>
+  </body>
+</html>
