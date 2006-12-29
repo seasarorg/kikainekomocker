@@ -207,7 +207,8 @@
           <div class="desc">
             <p>
             機械猫モッカーは、擬似化対象クラス、つまりどのクラスを生成するか、の指定を
-            テスト・ケースのフィールドで判断しています。
+            テスト・ケースのフィールドで判断しています。<br/>
+            必ず擬似化対象クラスを最初のフィールドとして宣言してください。
             </p>
             <p><img src="img/test1.jpg"></p>
             <p>この場合、機械猫モッカーは Calc の擬似クラスを生成すると判断します。</p>
@@ -256,9 +257,11 @@ hoge = (HogeInterface)di.getComponent();</pre>
             <p>
             擬似化対象クラスのメソッドが返り値を持つ場合（つまり void 型じゃない場合）
             は、基本的には assertEquals で返り値を指定してください。<br/>
-            （当然ですが、void 型は assertEquals に記述しないでください。）
+            （当然ですが、void 型は assertEquals に記述しないでください。）<br/>
+            期待値、実測値の順は特に指定しません。
             </p>
             <p><img src="img/test3.jpg"></p>
+            <p>■不定値の扱い</p>
             <p>
             assertEquals 以外で、例えば、以下のように記述した場合にも、
             <pre class="code">
@@ -269,7 +272,7 @@ calc.set("+");
 int i = calc.get(2, 3);
 assertEquals(5, i)</pre>
             </p>
-          </div>  <!-- end of desc section -->
+            </div>  <!-- end of desc section -->
 
           
         <h2>例<span class="orange">外</span>を投げるメソッドの記述</h2>
@@ -298,8 +301,10 @@ assertEquals(5, i)</pre>
             これらのうちのいくつかは解消されますが、ご注意ください。
             </p>
             <ul>
-            <li>クラス変数に、擬似化対象のクラスを必ず宣言してください。この宣言で擬似化対象を判断します。<br/>
-            また、擬似化対象のクラスは、クラス変数として必ず最初に記述してください。</li>
+            <li>テスト・ケースには以下の機械猫モッカーの予約語を使用することはできません。</br>
+            switch, case, default, return, this, synchronized, class</li>
+            <li>クラスの変数に、擬似化対象のクラスを必ず宣言してください。この宣言で擬似化対象を判断します。<br/>
+            また、擬似化対象のクラスは、必ず最初のクラスの変数として記述してください。</li>
             <li>擬似化対象の static メソッドには対応できません。</li>
             <li>制御構造文の内 switch 文は使用できません。<br/>
             また、continue句は使用できません。</li>
