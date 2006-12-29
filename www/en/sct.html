@@ -1,0 +1,112 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <style type="text/css">
+      <!--
+        @import url(../style.css);
+      //-->
+    </style>
+    <title>KikainekoMocker Project Web Site</title>
+  </head>
+  <body>
+    <a name="Top" />
+    <div id="wrapper">
+    
+      <div id="header">
+        <img class="kikaineko" src="img/kikaineko_top.png" alt="KikainekoMocker Project Web Site"/>
+        <p class="language"><a href="../index.html">Japanese</a></p>
+      </div>　<!-- end of header section -->
+      
+      <div id="main">
+      
+      <div id="left">
+        
+        <h1>Pseudo-Classes and <span id="orange">S</span>CT</h1>
+          <div class="desc">
+            <p>
+            When developing classes that has dependency with unimplemented classes 
+            or the environment, it is common to use "Pseudo-Classes". 
+            "Pseudo-Classes" are "classes that behave in the same way as the real 
+            class, but the implementation is not correct" 
+            (also known as mocks, stubs, or drivers).
+            With the  use of pseudo-classes, development and testing of 
+            such classes is performed.
+            </p>
+            <p>
+            Though the use of pseudo-classes is effective, it is difficult to develop 
+            the pseudo-class itself, and it takes work.  
+            To deal with this problem, many pseudo-class generation tools are provided, 
+            but the tools themselves have the following problems.
+            </p>
+            <ul>
+            <li>It is difficult to define the pseudo-class 
+          (Use of the tool's own unique API)</li>
+            <li>At the end, the definition code for the pseudo-class is thrown away</li>
+            </ul>
+            <p><img src="img/mocktools.jpg"></p>
+            <p>
+            For example, as seen in the diagram above, when class A has dependency with 
+            class B, and class B is unimplemented at the time of implementation or testing 
+            of class A, it is common to apply pseudo-classes.
+            The use of pseudo-class generation tools to reduce workload of 
+            creating such classes can be presumued.  But conventionally, 
+            there is a need to use the original API provided by the tool 
+            to define the pseudo-class.<br/>
+            In addition, the definition code for the pseudo-class 
+            is not used for other than to generating the class, so the definition code 
+            is thrown away after the simulation-class has been replaced with the real one.
+            Therefore, excess cost is payed to create pseudo-classes. 
+            </p>
+            <p>
+            SCT is a concept where the test code for a class is interpreted as
+            the defintion of I/O for the class itself, and pseudo-classes are 
+            generated from such definition codes, namely the test codes.<br/>
+            Information of external behavior of a class is include in test codes.  SCT 
+            uses this information and generates pseudo-classes.
+            </p>
+            <p>
+            As shown in the diagram below, since SCT apprehends the test code as the 
+            definition code for the pseudo-class, there is no need for learning the
+            tool's own unique API.  Also, when the pseudo-class is replace with the 
+            real class, the definition code itself is the code for testing, and is not 
+            thrown away.  Therefore, the test code is effectively used.
+            </p>
+            <p><img src="img/sct.jpg"></p>
+            <p>
+            KikainekoMocker reads JUnit test codes and generates pseudo-classes, 
+            under the concept of SCT.  By using the commonly used xUnit testing 
+            framework, creating test codes are relatively simple, and it is posible 
+            to intuitively define pseudo-classes.  
+            With JUnit, which is highly recognized, as the definition code, cost of 
+            studying the definition code for the pseudo-class can be reduced. <br/>
+            KikainekoMocker is a tool that implements the concept of SCT.  By 
+            analyzing JUnit test codes, pseudo-classes that pass the test 
+            code are generated.
+            </p>
+          </div>  <!-- end of desc section -->
+
+      </div>  <!-- end of left section -->
+      
+      
+      <div id="right">
+        <h1>Conte<span class="orange">n</span>ts</h1>
+        <div class="desc">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="introduction.html">What can KikainekoMocker do?</a></li>
+            <li><a href="userguide.html">How do you use KikainekoMocker?</a></li>
+            <li><a href="techoverview.html">How does KikainekoMocker work?</a></li>
+            <li><a href="http://sourceforge.jp/projects/kikainekomocker/files/">Download</a></li>
+          </ul>
+        </div>
+      </div>  <!-- end of right section -->
+      
+      </div> <!-- end of main section -->
+ 
+      <div id="footer">
+        &copy;Copyright 2006 The Seasar Foundation.&nbsp;&nbsp;All rights reserved.
+      </div>
+      
+    </div>
+  </body>
+</html>
