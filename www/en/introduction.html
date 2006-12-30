@@ -1,0 +1,237 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <style type="text/css">
+      <!--
+        @import url(../style.css);
+      //-->
+    </style>
+    <title>KikainekoMocker Project Web Site</title>
+  </head>
+  <body>
+    <div id="wrapper">
+    
+      <div id="header">
+        <img class="kikaineko" src="img/kikaineko_top.png" alt="KikainekoMocker Project Web Site"/>
+        <p class="language"><a href="../index.html">Japanese</a></p>
+      </div>　<!-- end of header section -->
+      
+      <div id="main">
+      <h1>KikainekoMocker</h1>
+      <h1>Java</h1>
+      <h1>Mock</h1>
+            
+        <div id="left">
+        
+        <h2>Generates Classes from Test <span class="orange">C</span>odes</h2>
+          
+          <div class="desc">
+            <p>
+            KikainekoMocker is a tool that generates pseudo-classses from test cases. (*1)
+            </p>
+            <p>
+            Pseudo-classes are "classes that behave in the same way as the real classes, 
+            but have the incorrect implementation" (known as mocks, stubs, or drivers).
+            </p>
+            <p>
+            KikainekoMocker is a tool that implements the concept of SCT, a method to generate pseudo-classes from test cases.  
+            </p>
+            <p>
+            KikainekoMocker reads JUnit test cases, and generates pseudo-classes which pass the test case.
+            </p>
+            <br/>
+            <p>
+            (*1)&nbsp;This concept is called SCT.  Refer to <a href="sct.html">"Pseudo-Classes and SCT"</a> for futher information.<br/>
+          </div>  <!-- end of desc section -->
+
+
+
+        <h2>Ge<span class="orange">n</span>erates Pseudo-Classes which Pass the Test</h2>
+          <div class="desc">
+            <p>
+            KikainekoMocker reads JUnit test cases, and generates pseudo-classes which pass the test case.
+            </p>
+            <p>
+            For example, let's say that there is a test code for Class Hoge named Class HogeTest.<br/>
+            If you let KikainekoMocker read HogeTest, the tool will parse HogeTest and automatically implement Class Hoge.  The generated Hoge class is implemented so it will pass the HogeTest Class.<br/>
+            But keep in mind that the Hoge class does not have the correct implementation.
+            </p>
+            <p>
+            <img src="img/intro01.jpg" alt="Parse HogeTest and generate Class Hoge">
+            </p>
+            <p>
+            So when are these pseudo-classes useful?<br/>
+            </p>
+            <p>
+            For one, there is the "Mock Pattern" which is introduced later on.
+            By using the mock pattern, implementation and testing can be performed more simply.  
+            </p>
+            <p>
+            Also, it can be use for verifying design, or searching for better interfaces.
+            </p>
+          </div>  <!-- end of desc section -->
+
+
+
+        <h2>When do you u<span class="orange">s</span>e it?</h2>
+          <div class="desc">
+            <p>
+            By using KikainekoMocker, though it is a pseudo code, you can obtain a moving class, just by writing a test code.
+            </p>
+            <p>
+            By using this characteristic, KikainekoMocker can be used in many ways.<br/>
+            A representative example is to use for mock patterns.  Here, we introduce when to use pseudo-classes.
+            </p>
+          </div>  <!-- end of desc section -->
+          
+        <h3>D<span class="orange">e</span>veloping Software with Multiple Developers</h3>
+          <div class="desc">
+            <p>When developing the same software among multiple developers, a problem arises which concern class dependencies.</p>
+            <p>
+            For example, you were to implement Class A.  If this Class A has a dependency relation with Class B, and this Class B is still under development by another member, you cannot start implementation or testing of Class A until Class B is completed.
+            </p>
+            <p>
+            There are cases in such problems occur.<br/>
+            Therefore, the development schedule must be adjusted to meet the dependencies of classes, or recently there are many technologies to resolve this problem of dependencies (such as DI).  Pseudo-Classes is another way to resolve this problem.  By preparing a pseudo-class for Class B, you can start implementation or testing for Class A.
+            </p>
+            <p>
+            <img src="img/intro02.jpg" alt="Substitute a class of dependency with a pseudo-class">
+            </p>
+            <p>These are the merits of pseudo-classes.  And in these cases KikainekoMocker works effectively.</p>
+            <p>
+            KikainekoMocker can be used to generate a pseudo-class for Class B.
+            Furthuremore, to use KikainekoMocker you just have to write a test.
+            </p>
+            <p>
+            In this case, you write a test code for Class B.  By using KikainekoMocker, a pseudo-class for Class B is generated.
+            </p>
+            <p>
+            Also, the following merits can be given.
+              <ul>
+              <li>If it is only the test code, it may be  easier to have the developer of Class B to inplement it
+              <li>Since test codes are concrete, misperception can be minimized between developers</li>
+              <li>When Class B is implemented, the test code can be reused</li>
+              </ul>
+            </p>
+            <p>
+            Often, though implementation of Class B may be difficult, to implement the test code may not be as difficult.  For that reason, you may be able to have the developer of Class B to implement it, and use that to generate the pseudo-class.
+            </p>
+            <p>Also, since the test is an actual code, misperception can be minimized.</p>
+            <p>In addition, when the real Class B is completed, the test code for generating the pseudo-class can be reused for the actual test code.</p>
+          </div>  <!-- end of desc section -->
+
+        <h3>Depen<span class="orange">d</span>ancy with the Environment</h3>
+          <div class="desc">
+            <p>Implementation and testing of classes which depend on the environment such as databases, tend to have difficulty or high cost.</p>
+            <p>That is, it is difficult to prepare the environment, and it takes time and cost just to perform a simple test.</p>
+            <p>
+            In these case, pseudo-classes can be use to resolve the dependency with the environment.
+            First you identify the section which depends on the environment, and replace it with the pseudo-class.
+            </p>
+            <p>
+            By using KikainekoMocker, you don't have to write complicated queries, or be aware of the environment.  You just have to write the test code.
+            <p>
+          </div>  <!-- end of desc section -->
+          
+        <h3>And Beyond<span class="orange">!?</span></h3>
+          <div class="desc">
+            <p>As mentioned above, KikainekoMocker works effectively to resolve dependency problems.</p>
+            <p>
+            But, KikainekoMocker can be used for not just generating pseudo-classes.  The fact that it generates pseudo-classes with test codes can be used.</p>
+            <p>
+            For example, actually execute classes which you just designed...
+            </p>
+            <p>
+            There are many possibilities.<br/>
+            Please think of the possibilites.  And please let us know! 
+            </p>
+          </div>  <!-- end of desc section -->
+          
+          
+          
+        <h2>How Do You Write the T<span class="orange">e</span>sts?</h2>
+          <div class="desc">
+            <p>
+            For detailed information on how to use KikainekoMocker, refer to <a href="userguide.html">"How do you use KikainekoMocker?"</a>.
+            </p>
+            <p>Here, for you to understand the general knowledge, we explain how to write the test code for a certain pseudo-class.</p>
+          </div>  <!-- end of desc section -->
+          
+        <h3>A <span class="orange">P</span>seudo-Class for Simple Calculation</h3>
+          <div class="desc">
+            <p>For example to generate a pseudo-class where you "set" the operator and have the class calculate, you may write a test code shown below.</p>
+            <pre class="code">
+package sample;
+import junit.framework.TestCase;
+
+public class CalcTest extends TestCase {
+  Calc calc;
+
+public void testAdd(){
+  calc=new Calc();
+  calc.set("+");
+  assertEquals(5,calc.get(2,3));
+}</pre>
+            <p>With this code, you can generate a pseudo-class where 5 is returned when 2 and 3 is given to the method "get", after setting "+" for the operator.</p>
+          </div>  <!-- end of desc section -->
+
+        <h3>A Pse<span class="orange">u</span>do-Class which use Objects</h3>
+          <div class="desc">
+            <p>KikainekoMocker can handle Objects without any problems.  Therefore you can generate pseudo-classes which use Objects.</p>
+            <p>For example, by changing the data type from int to Integer, KikainekoMocker generates the pseudo-class.</p>
+            <pre class="code">
+public void testAddInteger(){
+  calc=new Calc();
+  calc.set("+");
+  Integer i2=new Integer(2);
+  Integer i3=new Integer(3);
+  assertEquals(new Integer(5),calc.get(i2,i3));
+}</pre>
+            <p>As you can see, the test code for KikainekoMocker is not any different from ordinary test cases.</p>
+          </div>  <!-- end of desc section -->
+          
+        <h3>A Pseudo-Class with Methods that Return Va<span class="orange">r</span>ious Values</h3>
+          <div class="desc">
+            <p>With earlier examples, one method only returnd one value.</p>
+            <p>Let's make a pseudo-class with a method that returns various values.</p>
+            <pre class="code">
+public void testIncrement(){
+  calc=new Calc();
+  calc.setIncrement(1,0);
+  assertEquals(0,calc.next());
+  assertEquals(1,calc.next());
+  assertEquals(2,calc.next());
+}</pre>
+            <p>There is no meaning to each process, but this is an example of a test code which counts up numbers.</p>
+            <p>
+            KiainekoMocker generates these kinds of pseudo-classes without any problems.<br/>
+            This is also a normal test case.<br/>
+            You can also override setUp() and tearDown() methods.
+            </p>
+            <p>KikainekoMocker can generate pseudo-classes from normal test codes, shown as above.</p>
+          </div>  <!-- end of desc section -->
+      
+      </div>  <!-- end of left section -->
+      
+      <div id="right">
+        <h2>Conte<span class="orange">n</span>ts</h2>
+        <div class="desc">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><span class="strong">What can KikainekoMocker do?</span></li>
+            <li><a href="userguide.html">How do you use KikainekoMocker?</a></li>
+            <li><a href="techoverview.html">How does KikainekoMocker work?</a></li>
+            <li><a href="http://sourceforge.jp/projects/kikainekomocker/files/">Download</a></li>
+          </ul>
+        </div>
+      </div>  <!-- end of right section -->
+      
+      </div> <!-- end of main section -->
+ 
+      <div id="footer">
+        &copy;Copyright 2006 The Seasar Foundation.&nbsp;&nbsp;All rights reserved.
+      </div>
+      
+    </div> <!-- end of wrapper section -->
+  </body>
+</html>
