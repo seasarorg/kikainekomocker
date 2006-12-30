@@ -1,0 +1,396 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <style type="text/css">
+      <!--
+        @import url(../style.css);
+      //-->
+    </style>
+    <title>KikainekoMocker Project Web Site</title>
+  </head>
+  <body>
+    <a name="Top"></a>
+    <div id="wrapper">
+    
+      <div id="header">
+        <img class="kikaineko" src="img/kikaineko_top.png" alt="KikainekoMocker Project Web Site"/>
+        <p class="language"><a href="../index.html">Japanese</a></p>
+      </div>　<!-- end of header section -->
+      
+      <div id="main">
+      <h1>KikainekoMocker</h1>
+      <h1>Java</h1>
+      <h1>Mock</h1>
+      
+      <div id="left">
+        
+        <span id="title">How do you use Ki<span class="orange">k</span>ainekoMocker?</span><br/>
+        <div class="desc">
+        How to use Kinkaineko Mocker is explained.
+        </div>
+        
+        <h3><span class="orange">T</span>OC</h3>
+          <div class="desc">
+            <ul class="dl">
+              <li><a href="#GettingStarted">Quick Start</a></li>
+              <li><a href="#TestSample">Test Code Sample</a></li>
+              <li><a href="#HowToTest">How to Write Test Codes</a></li>
+              <li><a href="#Prerequisites">Prerequisites &amp; Constraints</a></li>
+              <li><a href="#TextUI">Executing from Text User Interface</a></li>
+            </ul>
+            <p>
+            When an error occurs installing or using KikianekoMocker, refer to <a href="taisho.html">&quot;Dealing with KikainekoMocker Problems&quot;</a> as well.
+            </p>
+          </div>
+
+        <a name="GettingStarted"></a>
+        <h2>Qui<span class="orange">c</span>k Start</h2>
+        
+        <h3>Instal<span class="orange">l</span>ing Kikaineko Mocker Plugin</h3>
+          <div class="desc">
+            <ol>
+            <li><a href="http://sourceforge.jp/projects/kikainekomocker/files/">Download</a> Kikaineko Mocker, and upzip it.</li>
+            <li>Place the unzipped folder under the plugins folder of your eclipse directory.</li>
+            </ol>
+            <p><img src="img/pluginin1.jpg"></p>
+            <p>That's it! We're done with installing the plugin.</p>
+            <div class="notice">
+            * KikainekoMocker can also be used from the command line.
+            </div>
+          </div>  <!-- end of desc section -->
+          
+        <h3>Creating Test <span class="orange">C</span>odes</h3>
+          <div class="desc">
+            <ol>
+            <li>After installing the plugin, run your Eclipse platform.</li>
+            <li>Here, we create a java project &quot; KMSample &quot;.</li>
+            <li>Create package &quot; sample &quot; in the KMSample project.</li>
+            <li>Create CalcTest.java under the sample package.</li>
+            <p><img src="img/sample2.jpg"></p>
+            <li>The code given as an example at &quot;<a href="#TestSample">Test Code Sample</a>&quot; is implemented here in CalcTest.java.</li>
+            <li>Obviously, since the Calc class does not exist, Eclipse shows many errors.</li>
+            <p><img src="img/sample3.jpg"></p>
+            </ol>
+       	  </div>  <!-- end of desc section -->
+	  
+        <h3>Exe<span class="orange">c</span>uting KikainekoMocker</h3>
+          <div class="desc">
+            <ol>
+            <li>Right click CalcTest.java.</li>
+            <li>Click on [KikainekoMocker] - [Generate Pseudo-Class].</li>
+            <p><img src="img/sample4.jpg"></p>
+            <li>A message may appear to warn you that the kikanekomocker.jar is needed to use the pseudo-class.  Confirm, and click &quot;yes&quot;.<br/>
+          (This message will appear only at the first time of exceution)</li>
+            <p><img src="img/sample5.jpg"></p>
+            <li>Then you'll see that Calc.java is generated.</li>
+            <p><img src="img/sample6.jpg"></p>
+            </ol>
+          </div>  <!-- end of desc section -->
+        
+        <h3>Executing the Te<span class="orange">s</span>t Class</h3>
+          <div class="desc">
+          <ol>
+          <li>Last, execute the CalcTest JUnit test case.</li>
+          <p><img src="img/sample7.jpg"></p>
+          </ol>
+          <p>The result, GREEN!</p>
+          <a href="#Top">[to top]</a>
+          </div>  <!-- end of desc section -->
+        
+        
+        <a name="TestSample"></a>
+        <h2>Test Co<span class="orange">d</span>e Sample</h2>
+        
+        <h3>A Sample Test Case for Kikai<span class="orange">n</span>ekoMocker</h3>
+          <div class="desc">
+            <p>
+            KikaienkoMocker generates a pseudo-class which passes a JUnit test case.<br/>
+            For example, it is possible to generate a pseudo-class which passes the 
+            following test case.
+            </p>
+            <pre class="code">
+package sample;
+import junit.framework.TestCase;
+
+public class CalcTest extends TestCase {
+    Calc calc;
+    
+    protected void setUp() throws Exception {
+        super.setUp();
+        calc=new Calc();
+    }
+    
+    public void testGet(){
+        assertEquals(0,calc.get(0,0));
+    }
+
+    public void testAdd(){
+        calc.set("+");
+        assertEquals(5,calc.get(2,3));
+    }
+    
+    public void testAddInteger(){
+        calc.set("+");
+        Integer i20=new Integer(20);
+        Integer i30=new Integer(30);
+        Integer i50=new Integer(50);
+        assertEquals(i50,calc.get(i20,i30));
+    }
+    
+    public void testMulti(){
+        calc.set("*");
+        assertEquals(6,calc.get(2,3));
+    }
+    
+    public void testDiv(){
+        calc.set("/");
+        assertEquals(2,calc.get(4,2));
+    }
+}</pre>
+            <p>
+            As you can see in the test case CalcTest, KikainekoMocker supports primitive types 
+            and objects.  KikainekoMocker handles most kinds of data types.<br/>
+            (Refer to "<a href="#Prerequisites">Prerequisites &amp; Constraints</a>" for 
+            detailed description of supported data types.)
+            </p>
+            <p>Also, it is possibe to generate a pseudo-class which passes the following test case.</p>
+            <pre class="code">
+package sample;
+import junit.framework.TestCase;
+
+public class TokenTest extends TestCase {
+    Token token;
+    
+    protected void setUp() throws Exception {
+        super.setUp();
+    }
+
+    public void testNext(){
+        token=new Token("a=10*c;");
+        assertEquals("a",token.next());
+        assertEquals("=",token.next());
+        assertEquals("10",token.next());
+        assertEquals("*",token.next());
+        assertEquals("c",token.next());
+        assertEquals(";",token.next());
+    }
+    public void testLength(){
+        token=new Token("a=10*c;");
+        assertEquals("6",token.length());
+    }
+}</pre>
+            <p>
+            As you can see in the test case TokenTest, the same method is called several times, 
+            but KikanekoMocker can handle this with out any problems.<br/>
+            With some tools, you can only define one return value per method, but 
+            KikainekoMocker decide the return value according to the method's execution order.
+            </p>
+            <p>
+            When the pseudo-class to generate already exists, KikanekoMocker 
+            comments out the existing code and writes the new pseudo code.
+            <p>
+            <a href="#Top">[to top]</a>
+          </div>  <!-- end of desc section -->
+
+
+
+        <a name="HowToTest"></a>
+        <h2>How to Wri<span class="orange">t</span>e Test Codes</h2>
+          <div class="desc">
+            <p>
+            KikainekoMocker evaluates ordinary test cases, but there are a few points 
+            in writing test cases for KikainekoMocker.</br>
+            Refer to &quot;<a href="#Prerequisites">Prerequisites &amp; 
+            Constraints</a>&quot; for detailed descriptions, at the same time.
+            </p>
+            <p>
+            Some pointers in writing test cases for KikainekoMocker will be explained.
+            </p>
+          </div>  <!-- end of desc section -->
+          
+        <h3>Defining the Pseudo-<span class="orange">C</span>lass for Generation</h3>
+          <div class="desc">
+            <p>
+            KinkainekoMocker judges which class to generate as the pseudo-class by the 
+            field of the test case.<br/>
+            Declare the pseudo-class as the first field of the test case.
+            </p>
+            <p><img src="img/test1.jpg"></p>
+            <p>In this case, the pseudo-class Calc is generated.</p>
+              <div class="notice">
+                <ul class="dl">
+                  <li>Declare the pseudo-class as the first field of the test case.</li>
+                  <li>At this point, do not instantiate, or assign null for its value.</li>
+                </ul>
+              </div>
+            <p>
+            If an interface such as "SomeInterface calc;" is specified, 
+            a pseudo-class which implements that class is generated.
+            </p>
+            <p>
+            If a superclass such as "SomeSuperClass calc;" is specified, 
+            a pseudo-class which extends that class is generated.
+            </p>
+            <p>
+            The java file to generate is determined from the instantiation of the defined field.
+            </p>
+            <p>
+            For example, when the following is written in the test case, 
+            KikainekoMocker generates Calc.java.
+            <pre class="code">
+  calc = new Calc();</pre>
+            </p>
+            <p>
+            Also, KikainekoMocker supports instantiation by DI (Dependency Injection) or
+            factory methods.
+            </p>
+            <p>
+            KikainekoMocker executes the DI or factory method.  If it succeeds and 
+            an object is returned, KikainekoMocker retrieves the class name, 
+            using it for the pseudo-class to generate.
+            </p>
+            <p>
+            For example, whent the following is written in the test case, 
+            KikainekoMocker generates HogeInterfaceImpl.java.
+            <pre class="code">
+HogeInterface hoge;
+hoge = (HogeInterface)di.getComponent();</pre>
+            </p>
+          </div>  <!-- end of desc section -->
+          
+        <h3>Define the Result of a Method Mainly with "assert<span class="orange">E</span>quals"</h3>
+          <div class="desc">
+            <p>
+            If a method of a pseudo-class has a return value, specify it with 
+            "assertEquals()".<br/>
+            (Do not use "assertEquals()", if the method does not have a return 
+            value, i.e. void return type.)<br/>
+            It does not matter in which the expected and actual value is written.
+            </p>
+            <p><img src="img/test3.jpg"></p>
+            <p>* Using Indeterminate Values</p>
+            <p>
+            Even if a return value of the pseudo-class method is written without using "assertEquals()" as follows, 
+            <pre class="code">
+int i = calc.get(2, 3);</pre>
+            if the value is resolved later on in the test code, that value is judged as the return value.
+            <pre class="code">
+calc.set("+");
+int i = calc.get(2, 3);
+assertEquals(5, i)</pre>
+            </p>
+            </div>  <!-- end of desc section -->
+
+          
+        <h3>Throwing Exce<span class="orange">p</span>tions</h3>
+          <div class="desc">
+            <p>
+            When a method of the pseudo-class throws an exception, use the try / catch / fail statements.
+            </p>
+            <p>
+            KikainekoMocker determines that the method written before the fail() statement, throws an exception.  <br/>
+            KikainekoMocker determines that the first exception caught in the catch statement, is the exception thrown from the relevant method.
+            </p>
+            <p><img src="img/test4.jpg"></p>
+            <p>
+            In the example above, when calc.set("a") is called an IllegalArgumentException is thrown.
+            </p>
+            <p>It is possible to specify custom exceptions to be thrown from methods.</p>
+            <a href="#Top">[to top]</a>
+          </div>  <!-- end of desc section -->
+
+
+
+        <a name="Prerequisites"></a>
+        <h2>Pr<span class="orange">e</span>requisites &amp; Constraints</h2>
+          
+          <h3>Prerequi<span id="orange">s</span>ites</h3>
+            <div class="desc">
+              <p>
+              KikainekoMocker parses test cases following Java 1.4 grammar specifications, 
+              but is not complete.  Here, detailed differences is shown.
+              </p>
+              <p>* Data Types which can be used</p>
+              <p>
+              KikainekoMocker cannot safely handle all primitive types.  In particular, 
+              the following types are not supported.
+              </p>
+              <ul>
+                <li>float (cannot handle octal or hex number format)</li>
+              </ul>
+            </div>
+          
+          <h3>Constrai<span class="orange">n</span>ts in Writing Test Cases</h3>
+            <div class="desc">
+              <p>
+              When writing test cases for KikainekoMocker, the following must be obeyed.<br/>
+              Some of these constraints will be resolved in the future.
+              </p>
+              <ul>
+              <li>The following reserved words for KikainekoMocker cannot be used in the tese case.</br>
+              switch, case, default, return, this, synchronized, class</li>
+              <li>Declare the pseudo-class to be generated as a class field.  With 
+              this declaration, KikainekoMocker determines the pseudo-class.<br/>
+              Declare the pseudo-class as the first field of the test case.</li>
+              <li>Does not support static methods of the pseudo-class.</li>
+              <li>Cannot use control flow statements such as "switch".<br/>
+              Also, "continue" statement cannot be used.</li>
+              </ul>
+              <a href="#Top">[to top]</a>
+            </div>  <!-- end of desc section -->
+
+
+
+        <a name="TextUI"></a>
+        <h2>Executing from Text Us<span class="orange">e</span>r Interface</h2>
+          <div class="desc">
+            <p>
+            Ordinarily, KikainekoMocker is to be used as an Eclipse Plugin, 
+            but it can be called from a text format.<br/>
+            The MockMaker class is used.
+            </p>
+            <p>In particular, execute the following method of the MockMaker class.</p>
+            <pre class="code">
+public static void main(String[] args){
+  try{
+    String[] ss={"src\\sample\\SampleTest.java"};
+    MockMaker.main(ss);
+  }catch(Throwable t){
+    t.printStackTrace();
+  }
+}</pre>
+            <p>
+            Specify the file path name of the test case, a relative path name from the Eclipse 
+            project, as a String array("ss" in the code above).<br/>
+            The MockMaker class exists under the package org.kikaineko.mock.textui.
+            </p>
+            <a href="#Top">[to top]</a>
+          </div>  <!-- end of desc section -->
+
+      </div>  <!-- end of left section -->
+      
+      
+      
+      <div id="right">
+        <h2>Conte<span class="orange">n</span>ts</h2>
+        <div class="desc">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="introduction.html">What can KikainekoMocker do?</a></li>
+            <li><span class="strong">How do you use KikainekoMocker?</span></li>
+            <li><a href="techoverview.html">How does KikainekoMocker work?</a></li>
+            <li><a href="http://sourceforge.jp/projects/kikainekomocker/files/">Download</a></li>
+          </ul>
+        </div>
+      </div>  <!-- end of right section -->
+      
+      </div> <!-- end of main section -->
+ 
+ 
+      <div id="footer">
+        &copy;Copyright 2006 The Seasar Foundation.&nbsp;&nbsp;All rights reserved.
+      </div>
+      
+    </div> <!-- end of wrapper section -->
+  </body>
+</html>

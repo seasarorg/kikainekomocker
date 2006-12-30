@@ -34,6 +34,11 @@ body
 
 h1
 {
+  display:none;
+}
+
+h2
+{
   color:#333;
   border-bottom:2px solid #fc6;
   font-size:small;
@@ -41,7 +46,7 @@ h1
   padding-left:3px;
 }
 
-h2
+h3
 {
   border-bottom:1px dashed #fc6;
   margin:7px 0px 7px 0px;
@@ -50,7 +55,7 @@ h2
   padding-left:6px;
 }
 
-h3
+h4
 {
   border-bottom:1px dotted #fc6;
   margin:7px 0px 7px 0px;
@@ -137,7 +142,7 @@ h3
   width:260px;
 }
 
-#right h1
+#right h2
 {
   border-style:none;
 }

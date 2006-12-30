@@ -18,6 +18,11 @@
       </div>　<!-- end of header section -->
       
       <div id="main">
+      <h1>KikainekoMocker</h1>
+      <h1>Java</h1>
+      <h1>Mock</h1>
+      <h1>機械猫モッカー</h1>
+      <h1>モック</h1>
       
       <div id="left">
         
@@ -26,7 +31,7 @@
         ここでは、機械猫モッカーの使用方法を説明します。
         </div>
         
-        <h2><span class="orange">目</span>次</h2>
+        <h3><span class="orange">目</span>次</h3>
           <div class="desc">
             <ul class="dl">
               <li><a href="#GettingStarted">はじめてみよう</a></li>
@@ -42,9 +47,9 @@
           </div>
 
         <a name="GettingStarted"></a>
-        <h1>はじめ<span class="orange">て</span>みよう</h1>
+        <h2>はじめ<span class="orange">て</span>みよう</h2>
         
-        <h2>イ<span class="orange">ン</span>ストール</h2>
+        <h3>イ<span class="orange">ン</span>ストール</h3>
           <div class="desc">
             <ol>
             <li>機械猫モッカー・プラグインを <a href="http://sourceforge.jp/projects/kikainekomocker/files/">download</a> して、zip ファイルを解凍します。</li>
@@ -57,7 +62,7 @@
             </div>
           </div>  <!-- end of desc section -->
           
-        <h2>テスト作<span id="orange">成</span></h2>
+        <h3>テスト作<span id="orange">成</span></h3>
           <div class="desc">
             <ol>
             <li>プラグインが導入できたら、Eclipse を起動してください。</li>
@@ -71,7 +76,7 @@
             </ol>
        	  </div>  <!-- end of desc section -->
 	  
-        <h2>機械猫モ<span class="orange">ッ</span>カー実行</h2>
+        <h3>機械猫モ<span class="orange">ッ</span>カー実行</h3>
           <div class="desc">
             <ol>
             <li>CalcTest.java をちゃんと保存したら、CalcTest.javaを右クリックしてください。</li>
@@ -85,7 +90,7 @@
             </ol>
           </div>  <!-- end of desc section -->
         
-        <h2>テ<span class="orange">ス</span>ト実行</h2>
+        <h3>テ<span class="orange">ス</span>ト実行</h3>
           <div class="desc">
           <ol>
           <li>最後に CalcTest の JUnit を実行してみましょう。</li>
@@ -97,9 +102,9 @@
         
         
         <a name="TestSample"></a>
-        <h1>テスト・<span class="orange">コ</span>ードのサンプル</h1>
+        <h2>テスト・<span class="orange">コ</span>ードのサンプル</h2>
         
-        <h2>機械猫モッカーのためのテス<span class="orange">ト</span>・ケースのサンプル</h2>
+        <h3>機械猫モッカーのためのテス<span class="orange">ト</span>・ケースのサンプル</h3>
           <div class="desc">
             <p>
             機械猫モッカーは JUnit のテスト・ケースをパスする擬似クラスを生成します。<br/>
@@ -192,7 +197,7 @@
 
 
         <a name="HowToTest"></a>
-        <h1>テス<span class="orange">ト</span>・コードの書き方</h1>
+        <h2>テス<span class="orange">ト</span>・コードの書き方</h2>
           <div class="desc">
             <p>
             機械猫モッカーは通常のテスト・ケースを解析しますが、いくつかテスト・ケースを書く上での
@@ -203,7 +208,7 @@
             </p>
           </div>  <!-- end of desc section -->
           
-        <h2>擬<span id="orange">似</span>クラス対象指定</h2>
+        <h3>擬<span id="orange">似</span>クラス対象指定</h3>
           <div class="desc">
             <p>
             機械猫モッカーは、擬似化対象クラス、つまりどのクラスを生成するか、の指定を
@@ -252,7 +257,7 @@ hoge = (HogeInterface)di.getComponent();</pre>
             </p>
           </div>  <!-- end of desc section -->
           
-        <h2>メソッドの返り値は、基本的に assert<span class="orange">E</span>quals で設定</h2>
+        <h3>メソッドの返り値は、基本的に assert<span class="orange">E</span>quals で設定</h3>
           <div class="desc">
             <p>
             擬似化対象クラスのメソッドが返り値を持つ場合（つまり void 型じゃない場合）
@@ -275,7 +280,7 @@ assertEquals(5, i)</pre>
             </div>  <!-- end of desc section -->
 
           
-        <h2>例<span class="orange">外</span>を投げるメソッドの記述</h2>
+        <h3>例<span class="orange">外</span>を投げるメソッドの記述</h3>
           <div class="desc">
             <p>
             擬似化対象クラスのメソッドが例外を投げる場合は、
@@ -294,28 +299,44 @@ assertEquals(5, i)</pre>
 
 
         <a name="Prerequisites"></a>
-        <h1>前提・制<span class="orange">約</span>事項</h1>
-          <div class="desc">
-            <p>
-            テスト・ケース記述には以下の制限が課せられています。<br/>
-            これらのうちのいくつかは解消されますが、ご注意ください。
-            </p>
-            <ul>
-            <li>テスト・ケースには以下の機械猫モッカーの予約語を使用することはできません。</br>
-            switch, case, default, return, this, synchronized, class</li>
-            <li>クラスの変数に、擬似化対象のクラスを必ず宣言してください。この宣言で擬似化対象を判断します。<br/>
-            また、擬似化対象のクラスは、必ず最初のクラスの変数として記述してください。</li>
-            <li>擬似化対象の static メソッドには対応できません。</li>
-            <li>制御構造文の内 switch 文は使用できません。<br/>
-            また、continue句は使用できません。</li>
-            </ul>
-            <a href="#Top">[to top]</a>
-          </div>  <!-- end of desc section -->
+        <h2>前提・制<span class="orange">約</span>事項</h2>
+          
+          <h3>前提事項</h3>
+            <div class="desc">
+              <p>
+              機械猫モッカーは Java1.4 の文法に沿った解析を行いますが、 完全ではありません。ここでは細かな差異を示します。
+              </p>
+              <p>■使用できるデータ型</p>
+              <p>
+              機械猫モッカーはすべてのプリミティブ型を安全に扱えません。具体的には、以下の型を扱えません。
+              </p>
+              <ul>
+                <li>float 型（ 8進数表現や16進数表現には対応していません）</li>
+              </ul>
+            </div>
+          
+          <h3>テスト・ケース記述に関する制限事項</h3>
+            <div class="desc">
+              <p>
+              テスト・ケース記述には以下の制限が課せられています。<br/>
+              これらのうちのいくつかは解消されますが、ご注意ください。
+              </p>
+              <ul>
+              <li>テスト・ケースには以下の機械猫モッカーの予約語を使用することはできません。</br>
+              switch, case, default, return, this, synchronized, class</li>
+              <li>クラスの変数に、擬似化対象のクラスを必ず宣言してください。この宣言で擬似化対象を判断します。<br/>
+              また、擬似化対象のクラスは、必ず最初のクラスの変数として記述してください。</li>
+              <li>擬似化対象の static メソッドには対応できません。</li>
+              <li>制御構造文の内 switch 文は使用できません。<br/>
+              また、continue句は使用できません。</li>
+              </ul>
+              <a href="#Top">[to top]</a>
+            </div>  <!-- end of desc section -->
 
 
 
         <a name="TextUI"></a>
-        <h1>テキストUIから<span class="orange">の</span>実行</h1>
+        <h2>テキストUIから<span class="orange">の</span>実行</h2>
           <div class="desc">
             <p>
             通常機械猫モッカーは Eclipse プラグインから実行されることを想定していますが、
@@ -344,7 +365,7 @@ public static void main(String[] args){
       
       
       <div id="right">
-        <h1>Conte<span class="orange">n</span>ts</h1>
+        <h2>Conte<span class="orange">n</span>ts</h2>
         <div class="desc">
           <ul>
             <li><a href="index.html">ホーム</a></li>

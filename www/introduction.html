@@ -17,10 +17,15 @@
       </div>　<!-- end of header section -->
       
       <div id="main">
+      <h1>KikainekoMocker</h1>
+      <h1>Java</h1>
+      <h1>Mock</h1>
+      <h1>機械猫モッカー</h1>
+      <h1>モック</h1>
             
         <div id="left">
         
-        <h1>テスト・コードから<span class="orange">ク</span>ラスを自動生成</h1>
+        <h2>テスト・コードから<span class="orange">ク</span>ラスを自動生成</h2>
           
           <div class="desc">
             <p>
@@ -43,7 +48,7 @@
 
 
 
-        <h1>テス<span class="orange">ト</span>を通る擬似クラスを作成</h1>
+        <h2>テス<span class="orange">ト</span>を通る擬似クラスを作成</h2>
           <div class="desc">
             <p>
             機械猫モッカーは、JUnit のテスト・ケースを読み、そのテストを通る擬似クラスを生成します。
@@ -69,7 +74,7 @@
 
 
 
-        <h1>どのような場合に使用<span class="orange">す</span>るのか？</h1>
+        <h2>どのような場合に使用<span class="orange">す</span>るのか？</h2>
           <div class="desc">
             <p>
             機械猫モッカーはテストさえ書けば、擬似とは言え実際に動くクラスを手にすることができるツールです。
@@ -80,7 +85,7 @@
             </p>
           </div>  <!-- end of desc section -->
           
-        <h2>複数<span class="orange">人</span>でソフトウェアを開発する場合</h2>
+        <h3>複数<span class="orange">人</span>でソフトウェアを開発する場合</h3>
           <div class="desc">
             <p>複数人で1つのソフトウエアを開発する場合、クラスの依存関係が問題になる場合があります。</p>
             <p>
@@ -117,7 +122,7 @@
             <p>そして、リアルなBクラスが完成した際に、定義として用いたテストコードを再利用してテストが可能になります。</p>
           </div>  <!-- end of desc section -->
 
-        <h2>環境に依<span class="orange">存</span>する場合</h2>
+        <h3>環境に依<span class="orange">存</span>する場合</h3>
           <div class="desc">
             <p>DBなどのような環境に依存したクラスの開発／テストはコストが高くついてしまいがちであることが知られています。</p>
             <p>つまり、環境を準備することが大変であったり、ちょっとテストするのにも時間やコストがかかったりしてしまうためです。</p>
@@ -130,7 +135,7 @@
             <p>
           </div>  <!-- end of desc section -->
           
-        <h2>さらには<span class="orange">!?</span></h2>
+        <h3>さらには<span class="orange">!?</span></h3>
           <div class="desc">
             <p>上記のように擬似クラスは依存関係を解消するのに威力を発揮します。</p>
             <p>
@@ -142,7 +147,7 @@
           
           
           
-        <h1>どのようなテストを書<span class="orange">く</span>のか？</h1>
+        <h2>どのようなテストを書<span class="orange">く</span>のか？</h2>
           <div class="desc">
             <p>
             詳しいテストケースの書き方や機械猫モッカーの使用方法については、<a href="userguide.html">「機械猫モッカーをどのように使うのか」</a>をご参照ください。
@@ -150,7 +155,7 @@
             <p>ここでは概要を理解していただくことを目的に、どのような擬似クラスが欲しいときにどのようなテストを書けばよいかを解説します。</p>
           </div>  <!-- end of desc section -->
           
-        <h2>単<span class="orange">純</span>な計算を行う擬似クラスを作る</h2>
+        <h3>単<span class="orange">純</span>な計算を行う擬似クラスを作る</h3>
           <div class="desc">
             <p>例えば、演算をsetして、計算させるような擬似クラスが欲しい場合、以下のようなテストを書けばよいでしょう。</p>
             <pre class="code">
@@ -168,7 +173,7 @@ public void testAdd(){
             <p>これで「+」をセットした後でgetメソッドに2と3を入れると5を返してくれる擬似クラスを生成することができます。</p>
           </div>  <!-- end of desc section -->
 
-        <h2>オブジェクト型を扱う擬<span class="orange">似</span>クラスを作る</h2>
+        <h3>オブジェクト型を扱う擬<span class="orange">似</span>クラスを作る</h3>
           <div class="desc">
             <p>機械猫モッカーはオブジェクト型の扱いも問題ないため、オブジェクト型を扱う擬似クラスを生成することができます。</p>
             <p>例えば、さきほどの上のテストコードのint部分をInteger型に変えたテストにしてもモッカーは正しく生成します。</p>
@@ -183,7 +188,7 @@ public void testAddInteger(){
             <p>どうでしょうか、機械猫モッカーに読ませるテストだと言っても、普通のテストケースとなんら変わりませんね。</p>
           </div>  <!-- end of desc section -->
           
-        <h2>色々な値を返すメソッドを持つ擬似クラスを<span class="orange">作</span>る</h2>
+        <h3>色々な値を返すメソッドを持つ擬似クラスを<span class="orange">作</span>る</h3>
           <div class="desc">
             <p>さて、今までの例では一つのメソッドは一つの値を返していませんでした。</p>
             <p>では、次に色々な値を返すメソッドを持つ擬似クラスを作ってみましょう。</p>
@@ -208,7 +213,7 @@ public void testIncrement(){
       
       
       <div id="right">
-        <h1>Conte<span class="orange">n</span>ts</h1>
+        <h2>Conte<span class="orange">n</span>ts</h2>
         <div class="desc">
           <ul>
             <li><a href="index.html">ホーム</a></li>

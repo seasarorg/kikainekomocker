@@ -18,6 +18,11 @@
       </div>　<!-- end of header section -->
       
       <div id="main">
+      <h1>KikainekoMocker</h1>
+      <h1>Java</h1>
+      <h1>Mock</h1>
+      <h1>機械猫モッカー</h1>
+      <h1>モック</h1>
       
       <div id="left">
       
@@ -30,7 +35,7 @@
         機械猫モッカーを使用するだけの場合、ここで記述されている内容を理解する必要はありません。
         </p>
         
-        <h2><span class="orange">目</span>次</h2>
+        <h3><span class="orange">目</span>次</h3>
           <div class="desc">
             <ul class="dl">
               <li><a href="#Overview">機械猫モッカーの設計概要</a></li>
@@ -41,7 +46,7 @@
 
 
         <a name="Overview"></a>
-        <h1>機械猫モッカーの設計<span class="orange">概</span>要</h1>
+        <h2>機械猫モッカーの設計<span class="orange">概</span>要</h2>
           <div class="desc">
             <p>機械猫モッカーは以下の流れに沿って処理を実行しています。</p>
             <ol>
@@ -51,7 +56,7 @@
             </ol>
           </div>  <!-- end of desc section -->
         
-        <h2>字<span class="orange">句</span>解析</h2>
+        <h3>字<span class="orange">句</span>解析</h3>
           <div class="desc">
             <p>機械猫モッカーは、Java が行う字句解析とほぼ等価な字句を切り出します。</p>
             <p>
@@ -69,7 +74,7 @@
             </p>
           </div>  <!-- end of desc section -->
         
-        <h2>テスト解<span class="orange">析</span></h2>
+        <h3>テスト解<span class="orange">析</span></h3>
           <div class="desc">
             <p>
             テスト解析フェーズでは、前期と後期の2つに分かれています。</br>
@@ -78,7 +83,7 @@
             </p>
           </div>  <!-- end of desc section -->
           
-          <h3>前期テスト解析</h3>
+          <h4>前期テスト解析</h4>
             <div class="desc">
               <p>
               前期テスト解析フェーズで主役を演じるのは、org.kikaineko.mock.analysis.TestAnalyst クラスです。<br/>
@@ -95,7 +100,7 @@
               </p>
             </div>  <!-- end of desc section -->
           
-          <h3>後期テスト解析</h3>
+          <h4>後期テスト解析</h4>
             <div class="desc">
               <p>
               次にいよいよテスト解析のメイン部分、後期テスト解析です。<br/>
@@ -122,7 +127,7 @@
               </p>
             </div>  <!-- end of desc section -->
         
-        <h2>コード<span class="orange">生</span>成</h2>
+        <h3>コード<span class="orange">生</span>成</h3>
           <div class="desc">
             <p>
             最終フェーズです。</br>
@@ -138,12 +143,12 @@
         
         
         <a name="Specification"></a>
-        <h1>擬似クラス<span class="orange">の</span>動作</h1>
+        <h2>擬似クラス<span class="orange">の</span>動作</h2>
           <div class="desc">
             <p>機械猫モッカーが生成する擬似クラスがどのように動作するかを大まかに解説します。</p>
           </div>   <!-- end of desc section -->
         
-        <h2>内部<span class="orange">変</span>数</h2>
+        <h3>内部<span class="orange">変</span>数</h3>
           <div class="desc">
             <p>
             機械猫モッカーはモッククラスに次のフィールドを保持します。</br>
@@ -163,7 +168,7 @@
             </dl>
           </div>   <!-- end of desc section -->
           
-          <h2>動<span class="orange">作</span>概要</h2>
+          <h3>動<span class="orange">作</span>概要</h3>
             <div class="desc">
               <p>擬似クラスの動作は単純です。</p>
               <ol>
@@ -194,7 +199,7 @@ public int doSomething(java.lang.Object arg0) {
               </p>
             </div>   <!-- end of desc section -->
           
-          <h2>呼び出<span class="orange">さ</span>れるメソッド</h2>
+          <h3>呼び出<span class="orange">さ</span>れるメソッド</h3>
             <div class="desc">
               <p>擬似クラスでは、以下のメソッドが呼び出されています。</p>
               <dl>
@@ -227,7 +232,7 @@ public int doSomething(java.lang.Object arg0) {
             </div>   <!-- end of desc section -->
             
             
-          <h2>文字<span class="orange">列</span>変換規則</h2>
+          <h3>文字<span class="orange">列</span>変換規則</h3>
             <div class="desc">
               <p>
               機械猫モッカーでは、内部で扱われる値を全て文字列で処理するため、
@@ -240,7 +245,7 @@ public int doSomething(java.lang.Object arg0) {
               </p>
             </div>   <!-- end of desc section -->
             
-            <h3>プリミティブ / String / ラッパー</h3>
+            <h4>プリミティブ / String / ラッパー</h4>
               <div class="desc">
                 <p>プリミティブ型、及び、String とラッパーは、ほぼそのまま変換します。</p>
                 <p>
@@ -256,7 +261,7 @@ assertEquals("1", ToStringer.get(new Integer(1)));</pre>
                 </p>
               </div>   <!-- end of desc section -->
             
-            <h3>オブジェクト</h3>
+            <h4>オブジェクト</h4>
               <div class="desc">
                 <p>オブジェクトの文字列表現への置き換えは、少し複雑な処理を行っています。</p>
                 <p>
@@ -289,7 +294,7 @@ assertEquals("1 2 ", ToStringer.get(new TwoInt(1, 2)));</pre>
 
 
       <div id="right">
-        <h1>Conte<span class="orange">n</span>ts</h1>
+        <h2>Conte<span class="orange">n</span>ts</h2>
         <div class="desc">
           <ul>
             <li><a href="index.html">ホーム</a></li>
