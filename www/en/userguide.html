@@ -268,7 +268,7 @@ hoge = (HogeInterface)di.getComponent();</pre>
             It does not matter in which the expected and actual value is written.
             </p>
             <p><img src="img/test3.jpg"></p>
-            <p>* Using Indeterminate Values</p>
+            <p><span class="strong">* Using Indeterminate Values</span></p>
             <p>
             Even if a return value of the pseudo-class method is written without using "assertEquals()" as follows, 
             <pre class="code">
@@ -278,6 +278,15 @@ int i = calc.get(2, 3);</pre>
 calc.set("+");
 int i = calc.get(2, 3);
 assertEquals(5, i)</pre>
+            </p>
+            <p>
+            When using indeterminate values, please be careful of the following:
+            <ul>
+            <li>Do not use as an argument of another method before resolving the indeterminate value.</li>
+            <li>If the indeterminate value is an Object type, it does not have to be resolved.
+            Also, methods of the Object type can be used.</li>
+            <li>Final Classes cannot be used as indeterminate values.</li>
+            </ul>
             </p>
             </div>  <!-- end of desc section -->
 

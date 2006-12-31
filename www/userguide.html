@@ -266,7 +266,7 @@ hoge = (HogeInterface)di.getComponent();</pre>
             期待値、実測値の順は特に指定しません。
             </p>
             <p><img src="img/test3.jpg"></p>
-            <p>■不定値の扱い</p>
+            <p>■<span class="strong">不定値の扱い</span></p>
             <p>
             assertEquals 以外で、例えば、以下のように記述した場合にも、
             <pre class="code">
@@ -276,6 +276,15 @@ int i = calc.get(2, 3);</pre>
 calc.set("+");
 int i = calc.get(2, 3);
 assertEquals(5, i)</pre>
+            </p>
+            <p>
+            不定値を使用するは、以下の点に注意してください。
+            <ul>
+            <li>不定値のまま、他のメソッドに引数として渡せません。</li>
+            <li>Object型の不定値の場合、解決しなくても良い。
+            また、そのObjectの操作も可能です。</li>
+            <li>finalクラスの不定値は使用できません。</li>
+            </ul>
             </p>
             </div>  <!-- end of desc section -->
 
